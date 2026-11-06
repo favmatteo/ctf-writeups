@@ -151,34 +151,24 @@ mkdocs build --strict
 
 ## 🌐 Pubblicazione su GitHub Pages
 
-### 1. Configura `mkdocs.yaml`
-Apri `mkdocs.yaml` e imposta il tuo username e il nome della repository:
-
-```yaml
-site_url: "https://favmatteo.github.io/ctf-writeups/"
-repo_name: "favmatteo/ctf-writeups"
-repo_url: "https://github.com/favmatteo/ctf-writeups"
-```
-
-### 2. Abilita GitHub Actions per GitHub Pages
-1. Vai sulla pagina della tua repository su GitHub.
-2. Clicca su **Settings** &rarr; **Pages** (nel menu a sinistra).
-3. Sotto la voce **Build and deployment**:
-   - Imposta **Source** su **GitHub Actions**.
-
-### 3. Effettua il Push sul branch `main`
+Il metodo più veloce e affidabile per pubblicare il blog senza dipendere dai runner cloud:
 
 ```bash
-git add .
-git commit -m "feat: aggiornamento writeup blog"
-git push origin main
+# Esegui il deploy direttamente da terminale
+.venv/bin/mkdocs gh-deploy
 ```
 
-La GitHub Action `.github/workflows/deploy.yml` verrà avviata automaticamente:
-- Installerà le dipendenze.
-- Eseguirà l'importatore Notion (se sono presenti nuovi file).
-- Compilerà il sito statico.
-- Lo pubblicherà direttamente sull'URL `https://favmatteo.github.io/ctf-writeups/`.
+Questo comando compila il sito in locale in 2 secondi e carica i file HTML pronti direttamente sul branch `gh-pages` di GitHub.
+
+### Configurazione su GitHub (solo la prima volta):
+1. Vai su **Settings** &rarr; **Pages** del tuo repository `ctf-writeups`.
+2. Sotto **Build and deployment**:
+   - **Source:** seleziona **Deploy from a branch**.
+   - **Branch:** seleziona **`gh-pages`** e cartella **`/ (root)`**.
+3. Clicca su **Save**.
+
+Il tuo blog sarà online all'indirizzo:
+👉 **`https://favmatteo.github.io/ctf-writeups/`**
 
 ---
 
