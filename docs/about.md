@@ -1,17 +1,17 @@
 ---
-title: "About // favmatteo"
-description: "Informazioni sull'autore e collegamenti ai profili di sicurezza."
+title: "About // Matteo Favaro"
+description: "Informazioni sull'autore Matteo Favaro e profili ufficiali TryHackMe e GitHub."
 ---
 
 # About
 
-Mi chiamo **Matteo** (`favmatteo`) e questo blog raccoglie i miei appunti personali, metodologie e writeup di macchine vulnerabili risolte principalmente su **TryHackMe**.
+Mi chiamo **Matteo Favaro**. Questo blog raccoglie i miei appunti personali, metodologie e writeup di challenge e macchine vulnerabili risolte principalmente su **TryHackMe**.
 
-L'obiettivo è documentare il percorso di analisi e tenere traccia delle tecniche apprese durante le esercitazioni.
+L'obiettivo è documentare il percorso di analisi e tenere traccia delle tecniche apprese durante le esercitazioni pratiche di penetration testing.
 
 ---
 
-## Profili & Collegamenti
+## Profili Ufficiali
 
-- **GitHub:** [github.com/favmatteo](https://github.com/favmatteo)
-- **TryHackMe:** [tryhackme.com/p/matteo.favaro460](https://tryhackme.com/p/matteo.favaro460)
+- **TryHackMe:** [`matteo.favaro460`](https://tryhackme.com/p/matteo.favaro460) &rarr; [tryhackme.com/p/matteo.favaro460](https://tryhackme.com/p/matteo.favaro460)
+- **GitHub:** [`favmatteo`](https://github.com/favmatteo) &rarr; [github.com/favmatteo](https://github.com/favmatteo)

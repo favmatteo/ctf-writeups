@@ -1,9 +1,9 @@
 ---
 title: "Home // CTF Writeups"
-description: "Archivio di writeup e note di sicurezza per macchine TryHackMe risolte da favmatteo."
+description: "Archivio di writeup e note di sicurezza per macchine TryHackMe risolte da Matteo Favaro (matteo.favaro460)."
 ---
 
-# CTF Writeups // favmatteo
+# CTF Writeups // Matteo Favaro
 
 Benvenuto nel mio archivio personale di writeup per le macchine CTF risolte sulla piattaforma **TryHackMe**.
 
@@ -41,8 +41,8 @@ Le ultime macchine analizzate ordinate per data di scansione reale:
     <div class="terminal-cmd">favmatteo@kali:~$ ./random-target.sh</div>
     <div class="terminal-output">
       [+] Target estratto: <a id="random-box-link" href="writeups/silver-platter.md" class="random-box-title">Silver Platter</a>
-      <button class="random-btn" id="reroll-btn" onclick="rerollTarget()">🎲 Reroll</button>
-      <span class="random-timer" id="random-timer">prossimo tra 5s...</span>
+      <button class="random-btn" id="reroll-btn" onclick="triggerManualReroll()">🎲 Reroll</button>
+      <span class="random-timer" id="random-timer">prossimo tra 8s...</span>
     </div>
   </div>
 </div>
@@ -74,63 +74,81 @@ Le ultime macchine analizzate ordinate per data di scansione reale:
     { title: "Windows Jump", url: "writeups/windows-jump.md" }
   ];
 
-  let currentIndex = -1;
-  let countdown = 5;
+  let currentIndex = 0;
+  let countdown = 8;
+  let timerInterval = null;
+  let isScrambling = false;
   const chars = "!<>-_\\/[]{}—=+*^?#________";
 
-  function scrambleText(element, finalText, callback) {
-    let iteration = 0;
+  function fastScramble(element, finalText, onComplete) {
+    isScrambling = true;
+    let frame = 0;
+    const totalFrames = 8;
     const interval = setInterval(() => {
+      frame++;
       element.innerText = finalText
         .split("")
-        .map((char, index) => {
-          if (index < iteration) {
-            return finalText[index];
-          }
-          return chars[Math.floor(Math.random() * chars.length)];
-        })
+        .map((ch, i) => (i < frame ? ch : chars[Math.floor(Math.random() * chars.length)]))
         .join("");
 
-      if (iteration >= finalText.length) {
+      if (frame >= totalFrames) {
         clearInterval(interval);
-        if (callback) callback();
+        element.innerText = finalText;
+        isScrambling = false;
+        if (onComplete) onComplete();
       }
-      iteration += 1 / 2;
-    }, 25);
+    }, 20);
   }
 
-  window.rerollTarget = function() {
+  function startCountdown() {
+    if (timerInterval) clearInterval(timerInterval);
+    countdown = 8;
+    updateTimerText();
+
+    timerInterval = setInterval(() => {
+      if (isScrambling) return;
+      countdown--;
+      updateTimerText();
+      if (countdown <= 0) {
+        pickNextTarget();
+      }
+    }, 1000);
+  }
+
+  function updateTimerText() {
+    const timerEl = document.getElementById("random-timer");
+    if (timerEl) {
+      timerEl.innerText = `prossimo tra ${countdown}s...`;
+    }
+  }
+
+  function pickNextTarget() {
     const linkEl = document.getElementById("random-box-link");
     if (!linkEl) return;
-    
+
+    if (timerInterval) clearInterval(timerInterval);
+
     let nextIndex;
     do {
       nextIndex = Math.floor(Math.random() * writeups.length);
     } while (nextIndex === currentIndex && writeups.length > 1);
-    
+
     currentIndex = nextIndex;
-    const item = writeups[currentIndex];
-    countdown = 5;
-    
-    scrambleText(linkEl, item.title, () => {
-      linkEl.href = item.url;
+    const target = writeups[currentIndex];
+
+    fastScramble(linkEl, target.title, () => {
+      linkEl.href = target.url;
+      startCountdown();
     });
+  }
+
+  window.triggerManualReroll = function() {
+    if (isScrambling) return;
+    pickNextTarget();
   };
 
-  // Timer interval for countdown
-  setInterval(() => {
-    const timerEl = document.getElementById("random-timer");
-    if (!timerEl) return;
-    countdown--;
-    if (countdown <= 0) {
-      window.rerollTarget();
-    } else {
-      timerEl.innerText = `prossimo tra ${countdown}s...`;
-    }
-  }, 1000);
-
-  // Initial pick
-  setTimeout(window.rerollTarget, 300);
+  // Avvio al caricamento della pagina
+  setTimeout(startCountdown, 500);
 })();
 </script>
 

@@ -269,13 +269,12 @@ def update_mkdocs_nav(records: list):
         lines = [
             "nav:",
             "  - Home: index.md",
-            "  - Writeups:",
-            "      - writeups/index.md",
-            "      - Macchine:"
+            '  - "Indice Writeup": writeups/index.md',
+            '  - "Macchine TryHackMe":'
         ]
         for r in sorted(records, key=lambda x: x["title"].lower()):
             safe_title = r['title'].replace('"', '\\"')
-            lines.append(f'          - "{safe_title}": writeups/{r["file"]}')
+            lines.append(f'      - "{safe_title}": writeups/{r["file"]}')
 
         lines.append("  - About: about.md")
         nav_block = "\n".join(lines) + "\n"
