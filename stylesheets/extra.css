@@ -447,6 +447,86 @@ a {
   }
 }
 
+/* ==========================================================================
+   Home Stats Grid & Writeup Meta Bar
+   ========================================================================== */
+
+/* Griglia statistiche home */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.8rem;
+  margin: 1.2rem 0 2rem 0;
+}
+
+.stat-card {
+  background: #0d1117;
+  border: 1px solid var(--term-border);
+  border-top: 3px solid var(--term-green);
+  border-radius: 5px;
+  padding: 1rem 0.8rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  border-color: var(--term-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 255, 102, 0.12);
+}
+
+.stat-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--term-green);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--term-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.4rem;
+}
+
+/* Meta bar sopra ogni writeup (tempo di lettura, OS, piattaforma) */
+.writeup-meta-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.6rem 0 1.8rem 0;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--term-border);
+}
+
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  background: #141922;
+  border: 1px solid var(--term-border);
+  color: var(--term-text-muted);
+  transition: border-color 0.2s;
+}
+
+.meta-pill:hover {
+  border-color: var(--term-green);
+  color: var(--term-text);
+}
+
+.meta-pill .meta-icon {
+  font-size: 0.85rem;
+}
+
+
 
 
 
