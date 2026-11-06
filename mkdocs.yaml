@@ -42,6 +42,7 @@ extra_css:
 
 extra_javascript:
   - javascripts/corrector.js
+  - javascripts/terminal.js
 
 # Social & Footer
 copyright: "Copyright &copy; Matteo Favaro"
