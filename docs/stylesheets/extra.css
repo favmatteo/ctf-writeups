@@ -273,4 +273,127 @@ a {
   }
 }
 
+/* ==========================================================================
+   Spellcheck & Flag Censor System Styles
+   ========================================================================== */
+
+/* Termini corretti nel testo */
+.spell-fix {
+  border-bottom: 1px dashed #00ff6699;
+  cursor: help;
+  transition: all 0.2s ease;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+.spell-fix:hover {
+  background-color: #00ff6615;
+  color: #55ff99;
+}
+
+/* Termini ripristinati alla versione originaria non corretta */
+.spell-fix--restored {
+  border-bottom: 1px dashed #ffbd2e;
+  color: #ffbd2e;
+  background-color: #ffbd2e10;
+}
+
+/* Card terminale per il widget di autocorrezione a fine articolo */
+.terminal-spell-card {
+  background: #090b0e;
+  border: 1px solid #1e2430;
+  border-left: 3px solid #00ff66;
+  border-radius: 6px;
+  margin: 3rem 0 1.5rem 0;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+}
+
+.terminal-spell-bar {
+  background: #12161f;
+  padding: 0.45rem 0.85rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #1e2430;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+}
+
+.spell-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
+.spell-dot.green { background: #27c93f; }
+
+.spell-title {
+  color: #8b949e;
+  font-weight: 500;
+}
+
+.spell-badge {
+  margin-left: auto;
+  font-size: 0.72rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  background: #00ff6615;
+  color: #00ff66;
+  border: 1px solid #00ff6640;
+}
+
+.spell-badge--warn {
+  background: #ffbd2e15 !important;
+  color: #ffbd2e !important;
+  border-color: #ffbd2e40 !important;
+}
+
+.terminal-spell-content {
+  padding: 1rem 1.2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.spell-desc {
+  color: var(--term-text);
+  margin-bottom: 0.8rem;
+}
+
+.spell-action-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.spell-restore-btn {
+  background: #141a24;
+  color: #00ff66;
+  border: 1px solid #00ff6660;
+  border-radius: 4px;
+  padding: 0.35rem 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.spell-restore-btn:hover {
+  background: #00ff6620;
+  border-color: #00ff66;
+  color: #ffffff;
+}
+
+.spell-hint {
+  font-size: 0.75rem;
+  color: var(--term-text-muted);
+}
+
+
 

@@ -192,8 +192,23 @@ def process_images_and_links(
 
     content = md_link_pat.sub(replace_link, content)
 
-    # Oscuramento automatico delle flag THM raw
-    content = re.sub(r'\b(THM|thm)\{([^*\s}]+)\}', lambda m: f"{m.group(1)}{{********************************}}", content)
+    # Oscuramento automatico avanzato per qualsiasi flag raw dimenticata
+    def censor_flag_match(m):
+        prefix = m.group(1)
+        val = m.group(2)
+        if set(val) == {'*'}:
+            return m.group(0)
+        return f"{prefix}{{********************************}}"
+
+    content = re.sub(r'\b(THM|thm|FLAG|flag|HTB|htb|CTF|ctf)\{([^\s}]+)\}', censor_flag_match, content)
+
+    # Censura hash isolati subito dopo comandi cat user.txt o root.txt
+    content = re.sub(
+        r'((?:cat\s+[^`\n]*(?:user|root)\.txt|type\s+[^`\n]*(?:user|root)\.txt)\s*\n+)([0-9a-fA-F]{32})\b',
+        r'\1********************************',
+        content,
+        flags=re.IGNORECASE
+    )
 
     return content, image_count
 

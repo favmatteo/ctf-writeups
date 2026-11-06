@@ -31,7 +31,8 @@ Basato su **Python**, **MkDocs** e il tema **mkdocs-material**, include uno scri
   - Copia e organizza tutte le immagini collegate in `docs/writeups/assets/<slug>/`, sistemando i link relativi e risolvendo i caratteri URL-encoded (`%20`).
   - Normalizza i linguaggi dei blocchi di codice (converte i tag errati di Notion come `basic` o blocchi non tipizzati in `bash` quando rileva prompt o tool di pentesting).
   - Rigenera in automatico la tabella dell'archivio in `docs/writeups/index.md` e sincronizza il menu di navigazione in `mkdocs.yaml`.
-- 🛡️ **Preservazione delle Sfide:** Le flag delle macchine all'interno dei testi sono oscurate (`THM{********}`) per rispetto delle challenge e delle policy delle piattaforme.
+- 🛡️ **Censura Automatica delle Flag:** Doppia protezione attiva (sia durante l'importazione Notion che a runtime nel browser) che individua e oscura in automatico qualsiasi flag in chiaro (`THM{...}`, `FLAG{...}`, `HTB{...}`) trasformandola in `THM{****************}`.
+- ✨ **Autocorrezione Ortografica & Ripristino:** Modulo intelligente (`docs/javascripts/corrector.js`) che corregge automaticamente al volo i refusi tipici di battitura e i termini di cybersecurity (es. *privilege escalation*, accenti, doppie), preservando intatti blocchi di codice e comandi. Include un pulsante terminale a fine articolo per visualizzare o ripristinare il testo originale in qualsiasi momento.
 - 🔍 **Ricerca Full-Text Istantanea:** Plugin di ricerca integrato con autocompletamento e suggerimenti in tempo reale.
 - 🚀 **Deploy Rapido con `mkdocs gh-deploy`:** Compilazione e pubblicazione sul branch `gh-pages` con un singolo comando locale.
 
@@ -44,6 +45,8 @@ PersonalBlog/
 ├── docs/
 │   ├── about.md                  # Pagina About: bio e profili ufficiali
 │   ├── index.md                  # Home Page: ultimi writeup per data e widget target
+│   ├── javascripts/
+│   │   └── corrector.js          # Autocorrezione ortografica e censura runtime flag
 │   ├── stylesheets/
 │   │   └── extra.css             # CSS custom (tema terminale dark, tabelle, badge)
 │   └── writeups/

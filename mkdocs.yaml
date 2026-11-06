@@ -36,6 +36,9 @@ theme:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/corrector.js
+
 # Social & Footer
 copyright: "Copyright &copy; Matteo Favaro"
 extra:
