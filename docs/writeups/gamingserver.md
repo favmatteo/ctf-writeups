@@ -1,6 +1,6 @@
 ---
 title: "GamingServer"
-description: "CTF Writeup per GamingServer (CTF / Lab)"
+description: "CTF Writeup - GamingServer (TryHackMe)"
 ---
 
 # GamingServer

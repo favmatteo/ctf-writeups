@@ -1,6 +1,6 @@
 ---
 title: "Silver Platter"
-description: "CTF Writeup per Silver Platter (TryHackMe)"
+description: "CTF Writeup - Silver Platter (TryHackMe)"
 ---
 
 # Silver Platter

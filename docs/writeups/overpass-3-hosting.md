@@ -1,6 +1,6 @@
 ---
 title: "Overpass 3 - Hosting"
-description: "CTF Writeup per Overpass 3 - Hosting (TryHackMe)"
+description: "CTF Writeup - Overpass 3 - Hosting (TryHackMe)"
 ---
 
 # Overpass 3 -  Hosting

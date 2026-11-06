@@ -1,6 +1,6 @@
 ---
 title: "Pickle Rick"
-description: "CTF Writeup per Pickle Rick (CTF / Lab)"
+description: "CTF Writeup - Pickle Rick (TryHackMe)"
 ---
 
 # Pickle Rick

@@ -1,6 +1,6 @@
 ---
 title: "0day"
-description: "CTF Writeup per 0day (TryHackMe)"
+description: "CTF Writeup - 0day (TryHackMe)"
 ---
 
 # 0day

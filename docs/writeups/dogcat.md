@@ -1,6 +1,6 @@
 ---
 title: "dogcat"
-description: "CTF Writeup per dogcat (TryHackMe)"
+description: "CTF Writeup - dogcat (TryHackMe)"
 ---
 
 # dogcat

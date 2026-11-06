@@ -1,6 +1,6 @@
 ---
 title: "Operation Promotion"
-description: "CTF Writeup per Operation Promotion (TryHackMe)"
+description: "CTF Writeup - Operation Promotion (TryHackMe)"
 ---
 
 # Operation Promotion

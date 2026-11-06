@@ -1,6 +1,6 @@
 ---
 title: "Mustacchio"
-description: "CTF Writeup per Mustacchio (CTF / Lab)"
+description: "CTF Writeup - Mustacchio (TryHackMe)"
 ---
 
 # Mustacchio

@@ -1,6 +1,6 @@
 ---
 title: "Agent Sudo"
-description: "CTF Writeup per Agent Sudo (TryHackMe)"
+description: "CTF Writeup - Agent Sudo (TryHackMe)"
 ---
 
 # Agent Sudo

@@ -1,5 +1,5 @@
-site_name: "[!] ROOT@TERMINAL:~$ CTF Writeups"
-site_description: "Cybersecurity & CTF Writeups - Terminal Edition"
+site_name: "CTF Writeups // favmatteo"
+site_description: "Raccolta personale di writeup CTF TryHackMe di favmatteo"
 site_author: "favmatteo"
 site_url: "https://favmatteo.github.io/ctf-writeups/"
 
@@ -73,32 +73,28 @@ markdown_extensions:
 # Navigation
 nav:
   - Home: index.md
-  - Writeups CTF:
-      - Overview: writeups/index.md
-      - "Web & Linux - Infiltrate": writeups/web-linux-infiltrate.md
-      - "Linux - Kernel & SUID PrivEsc": writeups/linux-privesc-kernel-suid.md
-      - Archivio Notion:
-          - "0day": writeups/0day.md
-          - "[INCOMPLETO] PaperWork": writeups/incompleto-paperwork.md
-          - "Agent Sudo": writeups/agent-sudo.md
-          - "Billing": writeups/billing.md
-          - "ConvertMyVideo": writeups/convertmyvideo.md
-          - "dogcat": writeups/dogcat.md
-          - "GamingServer": writeups/gamingserver.md
-          - "Jump": writeups/jump.md
-          - "Mr Robot": writeups/mr-robot.md
-          - "Mustacchio": writeups/mustacchio.md
-          - "Operation Promotion": writeups/operation-promotion.md
-          - "Overpass": writeups/overpass.md
-          - "Overpass 3 - Hosting": writeups/overpass-3-hosting.md
-          - "Pickle Rick": writeups/pickle-rick.md
-          - "Road": writeups/road.md
-          - "Silver Platter": writeups/silver-platter.md
-          - "Support": writeups/support.md
-          - "The Blob Blog": writeups/the-blob-blog.md
-          - "The Marketplace": writeups/the-marketplace.md
-          - "Tomghost": writeups/tomghost.md
-          - "TryHeartMe": writeups/tryheartme.md
-          - "Watcher": writeups/watcher.md
-          - "Windows Jump": writeups/windows-jump.md
+  - Writeups:
+      - Indice Generale: writeups/index.md
+      - "0day": writeups/0day.md
+      - "Agent Sudo": writeups/agent-sudo.md
+      - "Billing": writeups/billing.md
+      - "ConvertMyVideo": writeups/convertmyvideo.md
+      - "dogcat": writeups/dogcat.md
+      - "GamingServer": writeups/gamingserver.md
+      - "Jump": writeups/jump.md
+      - "Mr Robot": writeups/mr-robot.md
+      - "Mustacchio": writeups/mustacchio.md
+      - "Operation Promotion": writeups/operation-promotion.md
+      - "Overpass": writeups/overpass.md
+      - "Overpass 3 - Hosting": writeups/overpass-3-hosting.md
+      - "Pickle Rick": writeups/pickle-rick.md
+      - "Road": writeups/road.md
+      - "Silver Platter": writeups/silver-platter.md
+      - "Support": writeups/support.md
+      - "The Blob Blog": writeups/the-blob-blog.md
+      - "The Marketplace": writeups/the-marketplace.md
+      - "Tomghost": writeups/tomghost.md
+      - "TryHeartMe": writeups/tryheartme.md
+      - "Watcher": writeups/watcher.md
+      - "Windows Jump": writeups/windows-jump.md
   - About: about.md

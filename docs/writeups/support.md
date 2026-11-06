@@ -1,6 +1,6 @@
 ---
 title: "Support"
-description: "CTF Writeup per Support (TryHackMe)"
+description: "CTF Writeup - Support (TryHackMe)"
 ---
 
 # Support

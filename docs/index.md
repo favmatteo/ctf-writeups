@@ -1,55 +1,26 @@
 ---
-title: "Terminal // 0xRoot"
-description: "Cybersecurity, CTF Writeups, Penetration Testing & Reverse Engineering notes."
+title: "Home // CTF Writeups"
+description: "Archivio di writeup e note di sicurezza per macchine TryHackMe risolte da favmatteo."
 ---
 
-<div class="terminal-banner">
-<pre>
-   ______  ________ ________    _       ______  ________________  __  ______  _____
-  / ____/_  __/ ____/ ____/ |  / /   __  / __ \/  _/_  __/ ____/ / / / / __ \/ ___/
- / /     / / / /_  / /_   | | / / | / / / /_/ // /  / / / __/ / / / / /_/ /\__ \ 
-/ /___  / / / __/ / __/   | |/ /| |/ / / _, _// /  / / / /___/ /_/ / ____/___/ / 
-\____/ /_/ /_/   /_/      |___/ |___/ /_/ |_/___/ /_/ /_____/\____/_/    /____/  
-                                                                                 
-              [ SESSION INITIALIZED: 0xROOT@KALI-LINUX // TTY1 ]
-</pre>
-</div>
+# CTF Writeups // favmatteo
 
-<p>
-  <span class="terminal-badge">STATUS: ONLINE</span>
-  <span class="terminal-badge blue">ACCESS: ROOT</span>
-  <span class="terminal-badge yellow">ROLE: PENTESTER / CTF PLAYER</span>
-  <span class="terminal-cursor"></span>
-</p>
+Benvenuto nel mio archivio personale di writeup per le macchine CTF risolte principalmente sulla piattaforma **TryHackMe**.
 
-## `root@kali:~$ whoami`
+In ogni articolo vengono documentate le fasi della compromissione:
+- **Ricognizione & Scansione:** identificazione delle porte e delle versioni dei servizi esposti.
+- **Enumerazione:** directory busting, analisi delle risposte HTTP, ispezione dei parametri e ricerca di vulnerabilità.
+- **Initial Foothold (Exploit):** sfruttamento del vettore d'attacco per ottenere la prima shell utente.
+- **Privilege Escalation:** enumerazione interna di permessi SUID, cronjob, capabilities o misconfiguration per ottenere l'accesso come `root`.
 
-Benvenuto nel mio terminale di sicurezza offensiva. Questo archivio raccoglie writeup tecnici dettagliati, note metodologiche e chain di exploit da challenge CTF (TryHackMe, HackTheBox, VulnHub) ed esercitazioni di penetration testing.
-
-Tutti gli articoli sono stati strutturati secondo una metodologia standard:
-
-- **Reconnaissance & OSINT:** Scansione porte, fingerprinting dei servizi e ricognizione iniziale.
-- **Enumeration:** Directory busting, ispezione codice sorgente, analisi parametri e fuzzing.
-- **Initial Foothold (Exploitation):** Sfruttamento vulnerabilità (RCE, LFI/RFI, SQLi, SSRF, Deserialization).
-- **Privilege Escalation:** SUID binaries, cronjobs, misconfiguration sudo e kernel exploitation.
-- **Post-Exploitation & Flags:** Esecuzione di comandi, persistenza e flag catturate.
+> Le flag all'interno dei writeup sono intenzionalmente oscurate (`THM{********}`) per rispettare le regole delle challenge e non spoilerare le soluzioni.
 
 ---
 
-## `root@kali:~$ ls -la ./latest-writeups/`
+## Indice Rapido delle Macchine
 
-| Data | Challenge / Box | Piattaforma | Difficoltà | Vettore Principale | Read |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `2026-11` | **Infiltrate v1** | HackTheBox | <span class="terminal-badge yellow">Medium</span> | SSTI + Filter Bypass + SUID Abuse | [Read Writeup &rarr;](writeups/web-linux-infiltrate.md) |
-| `2026-11` | **OverKnight** | TryHackMe | <span class="terminal-badge red">Hard</span> | Tar Wildcard Injection + Kernel Exploit | [Read Writeup &rarr;](writeups/linux-privesc-kernel-suid.md) |
-| `ARCHIVE` | **Tutti i Writeup** | Varie | <span class="terminal-badge blue">All Levels</span> | Consultazione catalogo completo Notion & CTF | [Vai all'Indice &rarr;](writeups/index.md) |
+Puoi utilizzare la barra di ricerca in alto (o la scorciatoia ++ctrl+k++) per cercare rapidamente qualsiasi comando, porta, CVE o nome di macchina.
 
----
+Per consultare l'elenco completo con tutti i report:
 
-## `root@kali:~$ cat /etc/motd`
-
-```bash
-[+] "There is no patch for human stupidity... but there is always a shell."
-[+] Use search (Ctrl + K) to quickly find CVEs, tools, or machine names.
-[+] All flags and sensitive tokens are wrapped in collapsible spoiler boxes.
-```
+👉 **[Vai all'Archivio Completo dei Writeup](writeups/index.md)**

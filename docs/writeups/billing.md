@@ -1,6 +1,6 @@
 ---
 title: "Billing"
-description: "CTF Writeup per Billing (TryHackMe)"
+description: "CTF Writeup - Billing (TryHackMe)"
 ---
 
 # Billing

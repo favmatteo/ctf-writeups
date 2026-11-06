@@ -1,6 +1,6 @@
 ---
 title: "TryHeartMe"
-description: "CTF Writeup per TryHeartMe (TryHackMe)"
+description: "CTF Writeup - TryHeartMe (TryHackMe)"
 ---
 
 # TryHeartMe

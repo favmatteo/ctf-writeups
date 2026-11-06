@@ -1,6 +1,6 @@
 ---
 title: "Watcher"
-description: "CTF Writeup per Watcher (CTF / Lab)"
+description: "CTF Writeup - Watcher (TryHackMe)"
 ---
 
 # Watcher

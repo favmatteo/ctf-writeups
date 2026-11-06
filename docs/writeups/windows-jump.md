@@ -1,6 +1,6 @@
 ---
 title: "Windows Jump"
-description: "CTF Writeup per Windows Jump (TryHackMe)"
+description: "CTF Writeup - Windows Jump (TryHackMe)"
 ---
 
 # Windows Jump

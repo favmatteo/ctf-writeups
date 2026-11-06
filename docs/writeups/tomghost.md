@@ -1,6 +1,6 @@
 ---
 title: "Tomghost"
-description: "CTF Writeup per Tomghost (TryHackMe)"
+description: "CTF Writeup - Tomghost (TryHackMe)"
 ---
 
 # Tomghost

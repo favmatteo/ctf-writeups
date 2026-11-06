@@ -1,6 +1,6 @@
 ---
 title: "Overpass"
-description: "CTF Writeup per Overpass (TryHackMe)"
+description: "CTF Writeup - Overpass (TryHackMe)"
 ---
 
 # Overpass

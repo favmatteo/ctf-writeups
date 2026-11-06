@@ -1,6 +1,6 @@
 ---
 title: "ConvertMyVideo"
-description: "CTF Writeup per ConvertMyVideo (TryHackMe)"
+description: "CTF Writeup - ConvertMyVideo (TryHackMe)"
 ---
 
 # ConvertMyVideo

@@ -1,6 +1,6 @@
 ---
 title: "Mr Robot"
-description: "CTF Writeup per Mr Robot (TryHackMe)"
+description: "CTF Writeup - Mr Robot (TryHackMe)"
 ---
 
 # Mr.Robot

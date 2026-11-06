@@ -1,6 +1,6 @@
 ---
 title: "The Marketplace"
-description: "CTF Writeup per The Marketplace (TryHackMe)"
+description: "CTF Writeup - The Marketplace (TryHackMe)"
 ---
 
 # The Marketplace

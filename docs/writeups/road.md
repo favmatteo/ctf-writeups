@@ -1,6 +1,6 @@
 ---
 title: "Road"
-description: "CTF Writeup per Road (TryHackMe)"
+description: "CTF Writeup - Road (TryHackMe)"
 ---
 
 # Road

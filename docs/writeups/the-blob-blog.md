@@ -1,6 +1,6 @@
 ---
 title: "The Blob Blog"
-description: "CTF Writeup per The Blob Blog (TryHackMe)"
+description: "CTF Writeup - The Blob Blog (TryHackMe)"
 ---
 
 # The Blob Blog

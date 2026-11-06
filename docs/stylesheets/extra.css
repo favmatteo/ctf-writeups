@@ -1,282 +1,127 @@
 /* ==========================================================================
-   Hacker / Terminal Theme Overrides for MkDocs Material
+   Clean Terminal & Dark Cybersecurity Style
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Fira+Code:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --term-black: #0a0a0a;
-  --term-surface: #111418;
-  --term-surface-2: #161b22;
-  --term-surface-border: #232936;
+  --term-bg: #0a0c10;
+  --term-surface: #111419;
+  --term-border: #1f2530;
   --term-green: #00ff66;
-  --term-green-dim: #00c853;
-  --term-green-glow: rgba(0, 255, 102, 0.25);
-  --term-green-glow-strong: rgba(0, 255, 102, 0.6);
+  --term-green-dim: #00cc52;
   --term-text: #e6edf3;
   --term-text-muted: #8b949e;
-  --term-red: #ff3344;
-  --term-yellow: #ffb703;
-  --term-cyan: #00e5ff;
 }
 
 [data-md-color-scheme="slate"] {
-  --md-default-bg-color: var(--term-black);
+  --md-default-bg-color: var(--term-bg);
   --md-default-bg-color--light: var(--term-surface);
-  --md-default-bg-color--lighter: var(--term-surface-2);
+  --md-default-bg-color--lighter: #161b22;
   --md-default-fg-color: var(--term-text);
   --md-default-fg-color--light: var(--term-text-muted);
-  --md-default-fg-color--lighter: #6e7681;
-  --md-primary-fg-color: var(--term-black);
-  --md-primary-bg-color: var(--term-black);
+  --md-primary-fg-color: #07090c;
   --md-accent-fg-color: var(--term-green);
   --md-code-bg-color: #0d1117;
-  --md-code-fg-color: #00ff66;
+  --md-code-fg-color: var(--term-green);
 }
 
-/* Base typography */
+/* Typography */
 body, .md-body, input, textarea {
-  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-family: 'JetBrains Mono', monospace !important;
   letter-spacing: -0.01em;
-  background-color: var(--term-black) !important;
 }
 
-/* Scanline / CRT subtle effect (lightweight) */
-body::before {
-  content: " ";
-  display: block;
-  position: fixed;
-  top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-  background-size: 100% 4px;
-  z-index: 999;
-  pointer-events: none;
-  opacity: 0.15;
-}
-
-/* Header & Navigation bar */
+/* Header */
 .md-header {
-  background-color: #07090b !important;
+  background-color: #07090c !important;
   border-bottom: 1px solid var(--term-green-dim);
-  box-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
 }
 
 .md-header__title {
   color: var(--term-green) !important;
-  text-shadow: 0 0 8px var(--term-green-glow);
   font-weight: 700;
 }
 
-.md-tabs {
-  background-color: #0b0e12 !important;
-  border-bottom: 1px solid var(--term-surface-border);
-}
-
-.md-tabs__link {
-  color: var(--term-text-muted) !important;
-}
-
-.md-tabs__link--active, .md-tabs__link:hover {
+/* Navigation tabs & active items */
+.md-nav__link--active, .md-tabs__link--active {
   color: var(--term-green) !important;
-  text-shadow: 0 0 6px var(--term-green-glow);
-}
-
-/* Sidebar Navigation */
-.md-nav__link {
-  font-size: 0.82rem;
-  transition: all 0.2s ease-in-out;
-}
-
-.md-nav__link--active {
-  color: var(--term-green) !important;
-  font-weight: bold;
-  text-shadow: 0 0 5px var(--term-green-glow);
-}
-
-.md-nav__link:hover {
-  color: var(--term-green) !important;
-  padding-left: 4px;
-}
-
-/* Links */
-a {
-  color: var(--term-green);
-  transition: color 0.2s ease, text-shadow 0.2s ease;
-}
-
-a:hover {
-  color: #55ff99;
-  text-shadow: 0 0 8px var(--term-green-glow);
-}
-
-/* Blinking terminal cursor */
-.terminal-cursor {
-  display: inline-block;
-  width: 9px;
-  height: 1.15em;
-  vertical-align: -0.15em;
-  background-color: var(--term-green);
-  box-shadow: 0 0 8px var(--term-green);
-  animation: cursorBlink 1s infinite steps(2, start);
-}
-
-@keyframes cursorBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* Terminal ASCII Banner Container */
-.terminal-banner {
-  background-color: #06080a;
-  border: 1px solid #00ff6644;
-  border-radius: 6px;
-  padding: 1.2rem;
-  margin: 1.5rem 0;
-  box-shadow: 0 0 20px rgba(0, 255, 102, 0.1);
-  overflow-x: auto;
-}
-
-.terminal-banner pre {
-  margin: 0;
-  color: var(--term-green);
-  text-shadow: 0 0 7px var(--term-green-glow);
-  font-size: 0.85rem;
-  line-height: 1.25;
-}
-
-/* Terminal Prompt Pill */
-.terminal-badge {
-  display: inline-block;
-  font-size: 0.75rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
-  background: #00ff6615;
-  border: 1px solid var(--term-green-dim);
-  color: var(--term-green);
   font-weight: 600;
-  margin-right: 0.4rem;
 }
 
-.terminal-badge.red {
-  background: #ff334418;
-  border-color: #ff3344;
-  color: #ff5566;
-}
-
-.terminal-badge.blue {
-  background: #00e5ff18;
-  border-color: #00e5ff;
-  color: #00e5ff;
-}
-
-.terminal-badge.yellow {
-  background: #ffb70318;
-  border-color: #ffb703;
-  color: #ffb703;
-}
-
-/* Code blocks & Pygments styling */
-.md-typeset pre > code {
-  background-color: #090c10 !important;
-  border: 1px solid #1f242c;
-  border-left: 3px solid var(--term-green);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  border-radius: 4px;
-}
-
-.md-clipboard {
+.md-nav__link:hover, a:hover {
   color: var(--term-green) !important;
+}
+
+a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+/* Code Blocks */
+.md-typeset pre > code {
+  background-color: #0d1117 !important;
+  border: 1px solid var(--term-border);
+  border-left: 3px solid var(--term-green);
+  border-radius: 4px;
 }
 
 /* Inline code */
 .md-typeset code {
-  background-color: #121820;
-  color: #00ff66;
-  border: 1px solid #1f2937;
-  padding: 0.1em 0.35em;
+  background-color: #161b22;
+  color: var(--term-green);
+  border: 1px solid var(--term-border);
+  padding: 0.15em 0.4em;
   border-radius: 3px;
   font-size: 0.88em;
 }
 
-/* Admonitions & Callouts (Terminal look) */
-.md-typeset .admonition {
-  border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-  border-left-width: 4px !important;
-  background-color: #0c1015;
-}
-
-.md-typeset .admonition.success,
-.md-typeset details.success {
-  border-color: var(--term-green);
-}
-
-.md-typeset .admonition.danger,
-.md-typeset details.danger {
-  border-color: var(--term-red);
-}
-
-/* Flag spoiler box */
-.flag-box {
-  background: #050d08;
-  border: 1px solid var(--term-green);
-  border-radius: 4px;
-  padding: 0.8rem 1rem;
-  margin: 1rem 0;
-  box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
-}
-
-.flag-box summary {
-  color: var(--term-green);
-  font-weight: 700;
-  cursor: pointer;
-}
-
 /* Tables */
 .md-typeset table:not([class]) {
-  border: 1px solid var(--term-surface-border);
+  border: 1px solid var(--term-border);
   border-collapse: collapse;
-  background-color: #0a0d11;
-  font-size: 0.85rem;
+  background-color: var(--term-surface);
+  font-size: 0.88rem;
+  width: 100%;
 }
 
 .md-typeset table:not([class]) th {
-  background-color: #12171f;
+  background-color: #161b24;
   color: var(--term-green);
   border-bottom: 2px solid var(--term-green-dim);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-weight: 600;
+  padding: 0.6rem 0.8rem;
 }
 
 .md-typeset table:not([class]) td {
-  border: 1px solid #1f242c;
+  border: 1px solid var(--term-border);
+  padding: 0.5rem 0.8rem;
 }
 
 .md-typeset table:not([class]) tr:hover {
-  background-color: #12161c;
+  background-color: #141922;
 }
 
-/* Selection */
-::selection {
-  background: #00ff6640;
-  color: #ffffff;
+/* Admonitions */
+.md-typeset .admonition {
+  border-radius: 4px;
+  border-left-width: 3px !important;
+  background-color: #0e1218;
 }
 
 /* Scrollbars */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #080a0d;
+  background: var(--term-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1c232e;
-  border-radius: 4px;
-  border: 1px solid #283344;
+  background: #1f2530;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

@@ -1,6 +1,6 @@
 ---
 title: "Jump"
-description: "CTF Writeup per Jump (TryHackMe)"
+description: "CTF Writeup - Jump (TryHackMe)"
 ---
 
 # Jump
