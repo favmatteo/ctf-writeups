@@ -24,6 +24,7 @@ theme:
     - navigation.instant
     - navigation.tracking
     - navigation.sections
+    - navigation.indexes
     - navigation.expand
     - navigation.top
     - search.suggest
@@ -74,27 +75,28 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Writeups:
-      - Indice Generale: writeups/index.md
-      - "0day": writeups/0day.md
-      - "Agent Sudo": writeups/agent-sudo.md
-      - "Billing": writeups/billing.md
-      - "ConvertMyVideo": writeups/convertmyvideo.md
-      - "dogcat": writeups/dogcat.md
-      - "GamingServer": writeups/gamingserver.md
-      - "Jump": writeups/jump.md
-      - "Mr Robot": writeups/mr-robot.md
-      - "Mustacchio": writeups/mustacchio.md
-      - "Operation Promotion": writeups/operation-promotion.md
-      - "Overpass": writeups/overpass.md
-      - "Overpass 3 - Hosting": writeups/overpass-3-hosting.md
-      - "Pickle Rick": writeups/pickle-rick.md
-      - "Road": writeups/road.md
-      - "Silver Platter": writeups/silver-platter.md
-      - "Support": writeups/support.md
-      - "The Blob Blog": writeups/the-blob-blog.md
-      - "The Marketplace": writeups/the-marketplace.md
-      - "Tomghost": writeups/tomghost.md
-      - "TryHeartMe": writeups/tryheartme.md
-      - "Watcher": writeups/watcher.md
-      - "Windows Jump": writeups/windows-jump.md
+      - writeups/index.md
+      - Macchine:
+          - "0day": writeups/0day.md
+          - "Agent Sudo": writeups/agent-sudo.md
+          - "Billing": writeups/billing.md
+          - "ConvertMyVideo": writeups/convertmyvideo.md
+          - "dogcat": writeups/dogcat.md
+          - "GamingServer": writeups/gamingserver.md
+          - "Jump": writeups/jump.md
+          - "Mr Robot": writeups/mr-robot.md
+          - "Mustacchio": writeups/mustacchio.md
+          - "Operation Promotion": writeups/operation-promotion.md
+          - "Overpass": writeups/overpass.md
+          - "Overpass 3 - Hosting": writeups/overpass-3-hosting.md
+          - "Pickle Rick": writeups/pickle-rick.md
+          - "Road": writeups/road.md
+          - "Silver Platter": writeups/silver-platter.md
+          - "Support": writeups/support.md
+          - "The Blob Blog": writeups/the-blob-blog.md
+          - "The Marketplace": writeups/the-marketplace.md
+          - "Tomghost": writeups/tomghost.md
+          - "TryHeartMe": writeups/tryheartme.md
+          - "Watcher": writeups/watcher.md
+          - "Windows Jump": writeups/windows-jump.md
   - About: about.md
