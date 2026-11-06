@@ -1,0 +1,104 @@
+site_name: "[!] ROOT@TERMINAL:~$ CTF Writeups"
+site_description: "Cybersecurity & CTF Writeups - Terminal Edition"
+site_author: "favmatteo"
+site_url: "https://favmatteo.github.io/ctf-writeups/"
+
+# Repository
+repo_name: "favmatteo/ctf-writeups"
+repo_url: "https://github.com/favmatteo/ctf-writeups"
+edit_uri: ""
+
+# Theme configuration
+theme:
+  name: material
+  language: en
+  palette:
+    # Rigorous dark terminal theme
+    scheme: slate
+    primary: black
+    accent: lime
+  font:
+    text: JetBrains Mono
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+
+# Custom styling for hacker terminal aesthetic
+extra_css:
+  - stylesheets/extra.css
+
+# Plugins
+plugins:
+  - search
+
+# Markdown Extensions
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: "#"
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.caret
+  - pymdownx.tilde
+
+# Navigation
+nav:
+  - Home: index.md
+  - Writeups CTF:
+      - Overview: writeups/index.md
+      - "Web & Linux - Infiltrate": writeups/web-linux-infiltrate.md
+      - "Linux - Kernel & SUID PrivEsc": writeups/linux-privesc-kernel-suid.md
+      - Archivio Notion:
+          - "0day": writeups/0day.md
+          - "[INCOMPLETO] PaperWork": writeups/incompleto-paperwork.md
+          - "Agent Sudo": writeups/agent-sudo.md
+          - "Billing": writeups/billing.md
+          - "ConvertMyVideo": writeups/convertmyvideo.md
+          - "dogcat": writeups/dogcat.md
+          - "GamingServer": writeups/gamingserver.md
+          - "Jump": writeups/jump.md
+          - "Mr Robot": writeups/mr-robot.md
+          - "Mustacchio": writeups/mustacchio.md
+          - "Operation Promotion": writeups/operation-promotion.md
+          - "Overpass": writeups/overpass.md
+          - "Overpass 3 - Hosting": writeups/overpass-3-hosting.md
+          - "Pickle Rick": writeups/pickle-rick.md
+          - "Road": writeups/road.md
+          - "Silver Platter": writeups/silver-platter.md
+          - "Support": writeups/support.md
+          - "The Blob Blog": writeups/the-blob-blog.md
+          - "The Marketplace": writeups/the-marketplace.md
+          - "Tomghost": writeups/tomghost.md
+          - "TryHeartMe": writeups/tryheartme.md
+          - "Watcher": writeups/watcher.md
+          - "Windows Jump": writeups/windows-jump.md
+  - About: about.md
