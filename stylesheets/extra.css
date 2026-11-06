@@ -127,3 +127,99 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--term-green-dim);
 }
+
+/* Interactive Terminal Card */
+.terminal-card {
+  background: #090b0e;
+  border: 1px solid #1e2430;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.terminal-bar {
+  background: #12161f;
+  padding: 0.4rem 0.8rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #1e2430;
+  font-size: 0.8rem;
+  color: var(--term-text-muted);
+}
+
+.term-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+.term-dot.red { background: #ff5f56; }
+.term-dot.yellow { background: #ffbd2e; }
+.term-dot.green { background: #27c93f; }
+
+.term-title {
+  margin-left: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: #8b949e;
+}
+
+.terminal-body {
+  padding: 1rem 1.2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+}
+
+.terminal-cmd {
+  color: var(--term-green);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.terminal-output {
+  color: var(--term-text);
+  line-height: 1.6;
+}
+
+.random-box-title {
+  color: #00ff66 !important;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: underline;
+  padding: 0.1rem 0.3rem;
+  background: #00ff6615;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.random-box-title:hover {
+  background: #00ff6630;
+  color: #55ff99 !important;
+}
+
+.random-btn {
+  background: #141a24;
+  color: #00ff66;
+  border: 1px solid #00ff6660;
+  border-radius: 4px;
+  padding: 0.25rem 0.65rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-left: 0.8rem;
+  transition: background 0.2s;
+}
+
+.random-btn:hover {
+  background: #00ff6622;
+}
+
+.random-timer {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: #6e7681;
+  margin-left: 0.6rem;
+}
+

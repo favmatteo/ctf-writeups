@@ -301,10 +301,32 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#indice-rapido-delle-macchine" class="md-nav__link">
+  <a href="#favmatteokali-latest-writeupssh-limit-6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Indice Rapido delle Macchine
+        favmatteo@kali:~$ ./latest-writeups.sh --limit 6
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#favmatteokali-shuf-n-1-targetstxt-auto-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        favmatteo@kali:~$ shuf -n 1 targets.txt --auto-cycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#archivio-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Archivio Completo
       
     </span>
   </a>
@@ -327,6 +349,14 @@
   
     
     
+      
+        
+          
+        
+      
+        
+      
+    
     
     
       
@@ -344,8 +374,9 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="writeups/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -359,8 +390,14 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
@@ -374,20 +411,83 @@
           <ul class="md-nav__list" data-md-scrollfix>
             
               
+            
+              
                 
   
   
   
   
-    <li class="md-nav__item">
-      <a href="writeups/" class="md-nav__link">
+    
+    
+      
         
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
     
   
-    Indice Generale
+    Macchine
   
 
     
@@ -395,11 +495,19 @@
   
   
 
-      </a>
-    </li>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Macchine
   
 
-              
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -1023,6 +1131,14 @@
     </li>
   
 
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
@@ -1078,10 +1194,32 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#indice-rapido-delle-macchine" class="md-nav__link">
+  <a href="#favmatteokali-latest-writeupssh-limit-6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Indice Rapido delle Macchine
+        favmatteo@kali:~$ ./latest-writeups.sh --limit 6
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#favmatteokali-shuf-n-1-targetstxt-auto-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        favmatteo@kali:~$ shuf -n 1 targets.txt --auto-cycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#archivio-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Archivio Completo
       
     </span>
   </a>
@@ -1106,20 +1244,172 @@
 
 
 <h1 id="ctf-writeups-favmatteo">CTF Writeups // favmatteo<a class="headerlink" href="#ctf-writeups-favmatteo" title="Permanent link">#</a></h1>
-<p>Benvenuto nel mio archivio personale di writeup per le macchine CTF risolte principalmente sulla piattaforma <strong>TryHackMe</strong>.</p>
-<p>In ogni articolo vengono documentate le fasi della compromissione:
-- <strong>Ricognizione &amp; Scansione:</strong> identificazione delle porte e delle versioni dei servizi esposti.
-- <strong>Enumerazione:</strong> directory busting, analisi delle risposte HTTP, ispezione dei parametri e ricerca di vulnerabilità.
-- <strong>Initial Foothold (Exploit):</strong> sfruttamento del vettore d'attacco per ottenere la prima shell utente.
-- <strong>Privilege Escalation:</strong> enumerazione interna di permessi SUID, cronjob, capabilities o misconfiguration per ottenere l'accesso come <code>root</code>.</p>
+<p>Benvenuto nel mio archivio personale di writeup per le macchine CTF risolte sulla piattaforma <strong>TryHackMe</strong>.</p>
+<p>In ogni articolo vengono documentate le fasi della compromissione: ricognizione, scansione delle porte, enumerazione, exploit per l'initial foothold e privilege escalation per ottenere l'accesso root.</p>
 <blockquote>
-<p>Le flag all'interno dei writeup sono intenzionalmente oscurate (<code>THM{********}</code>) per rispettare le regole delle challenge e non spoilerare le soluzioni.</p>
+<p>Le flag all'interno dei testi sono oscurate (<code>THM{********}</code>) per preservare le challenge.</p>
 </blockquote>
 <hr />
-<h2 id="indice-rapido-delle-macchine">Indice Rapido delle Macchine<a class="headerlink" href="#indice-rapido-delle-macchine" title="Permanent link">#</a></h2>
-<p>Puoi utilizzare la barra di ricerca in alto (o la scorciatoia <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-k">K</kbd></span>) per cercare rapidamente qualsiasi comando, porta, CVE o nome di macchina.</p>
-<p>Per consultare l'elenco completo con tutti i report:</p>
-<p>👉 <strong><a href="writeups/">Vai all'Archivio Completo dei Writeup</a></strong></p>
+<h2 id="favmatteokali-latest-writeupssh-limit-6"><code>favmatteo@kali:~$ ./latest-writeups.sh --limit 6</code><a class="headerlink" href="#favmatteokali-latest-writeupssh-limit-6" title="Permanent link">#</a></h2>
+<p>Le ultime macchine analizzate ordinate per data di scansione reale:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Data Scansione</th>
+<th style="text-align: left;">Macchina / Box</th>
+<th style="text-align: left;">Piattaforma</th>
+<th style="text-align: left;">Link Report</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>2026-11-06</code></td>
+<td style="text-align: left;"><strong>Silver Platter</strong></td>
+<td style="text-align: left;">TryHackMe</td>
+<td style="text-align: left;"><a href="writeups/silver-platter/">Leggi writeup →</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>2026-11-04</code></td>
+<td style="text-align: left;"><strong>Billing</strong></td>
+<td style="text-align: left;">TryHackMe</td>
+<td style="text-align: left;"><a href="writeups/billing/">Leggi writeup →</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>2026-10-31</code></td>
+<td style="text-align: left;"><strong>Windows Jump</strong></td>
+<td style="text-align: left;">TryHackMe</td>
+<td style="text-align: left;"><a href="writeups/windows-jump/">Leggi writeup →</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>2026-10-31</code></td>
+<td style="text-align: left;"><strong>GamingServer</strong></td>
+<td style="text-align: left;">TryHackMe</td>
+<td style="text-align: left;"><a href="writeups/gamingserver/">Leggi writeup →</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>2026-10-30</code></td>
+<td style="text-align: left;"><strong>0day</strong></td>
+<td style="text-align: left;">TryHackMe</td>
+<td style="text-align: left;"><a href="writeups/0day/">Leggi writeup →</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>2026-10-27</code></td>
+<td style="text-align: left;"><strong>Watcher</strong></td>
+<td style="text-align: left;">TryHackMe</td>
+<td style="text-align: left;"><a href="writeups/watcher/">Leggi writeup →</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="favmatteokali-shuf-n-1-targetstxt-auto-cycle"><code>favmatteo@kali:~$ shuf -n 1 targets.txt --auto-cycle</code><a class="headerlink" href="#favmatteokali-shuf-n-1-targetstxt-auto-cycle" title="Permanent link">#</a></h2>
+<div class="terminal-card">
+  <div class="terminal-bar">
+    <span class="term-dot red"></span>
+    <span class="term-dot yellow"></span>
+    <span class="term-dot green"></span>
+    <span class="term-title">bash - favmatteo@kali: ~</span>
+  </div>
+  <div class="terminal-body">
+    <div class="terminal-cmd">favmatteo@kali:~$ ./random-target.sh</div>
+    <div class="terminal-output">
+      [+] Target estratto: <a id="random-box-link" href="writeups/silver-platter.md" class="random-box-title">Silver Platter</a>
+      <button class="random-btn" id="reroll-btn" onclick="rerollTarget()">🎲 Reroll</button>
+      <span class="random-timer" id="random-timer">prossimo tra 5s...</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const writeups = [
+    { title: "0day", url: "writeups/0day.md" },
+    { title: "Agent Sudo", url: "writeups/agent-sudo.md" },
+    { title: "Billing", url: "writeups/billing.md" },
+    { title: "ConvertMyVideo", url: "writeups/convertmyvideo.md" },
+    { title: "dogcat", url: "writeups/dogcat.md" },
+    { title: "GamingServer", url: "writeups/gamingserver.md" },
+    { title: "Jump", url: "writeups/jump.md" },
+    { title: "Mr Robot", url: "writeups/mr-robot.md" },
+    { title: "Mustacchio", url: "writeups/mustacchio.md" },
+    { title: "Operation Promotion", url: "writeups/operation-promotion.md" },
+    { title: "Overpass", url: "writeups/overpass.md" },
+    { title: "Overpass 3 - Hosting", url: "writeups/overpass-3-hosting.md" },
+    { title: "Pickle Rick", url: "writeups/pickle-rick.md" },
+    { title: "Road", url: "writeups/road.md" },
+    { title: "Silver Platter", url: "writeups/silver-platter.md" },
+    { title: "Support", url: "writeups/support.md" },
+    { title: "The Blob Blog", url: "writeups/the-blob-blog.md" },
+    { title: "The Marketplace", url: "writeups/the-marketplace.md" },
+    { title: "Tomghost", url: "writeups/tomghost.md" },
+    { title: "TryHeartMe", url: "writeups/tryheartme.md" },
+    { title: "Watcher", url: "writeups/watcher.md" },
+    { title: "Windows Jump", url: "writeups/windows-jump.md" }
+  ];
+
+  let currentIndex = -1;
+  let countdown = 5;
+  const chars = "!<>-_\\/[]{}—=+*^?#________";
+
+  function scrambleText(element, finalText, callback) {
+    let iteration = 0;
+    const interval = setInterval(() => {
+      element.innerText = finalText
+        .split("")
+        .map((char, index) => {
+          if (index < iteration) {
+            return finalText[index];
+          }
+          return chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join("");
+
+      if (iteration >= finalText.length) {
+        clearInterval(interval);
+        if (callback) callback();
+      }
+      iteration += 1 / 2;
+    }, 25);
+  }
+
+  window.rerollTarget = function() {
+    const linkEl = document.getElementById("random-box-link");
+    if (!linkEl) return;
+
+    let nextIndex;
+    do {
+      nextIndex = Math.floor(Math.random() * writeups.length);
+    } while (nextIndex === currentIndex && writeups.length > 1);
+
+    currentIndex = nextIndex;
+    const item = writeups[currentIndex];
+    countdown = 5;
+
+    scrambleText(linkEl, item.title, () => {
+      linkEl.href = item.url;
+    });
+  };
+
+  // Timer interval for countdown
+  setInterval(() => {
+    const timerEl = document.getElementById("random-timer");
+    if (!timerEl) return;
+    countdown--;
+    if (countdown <= 0) {
+      window.rerollTarget();
+    } else {
+      timerEl.innerText = `prossimo tra ${countdown}s...`;
+    }
+  }, 1000);
+
+  // Initial pick
+  setTimeout(window.rerollTarget, 300);
+})();
+</script>
+
+<hr />
+<h2 id="archivio-completo">Archivio Completo<a class="headerlink" href="#archivio-completo" title="Permanent link">#</a></h2>
+<p>Per visualizzare e filtrare tutte le 22 macchine disponibili:</p>
+<p>👉 <strong><a href="writeups/">Apri l'Indice Generale dei Writeup</a></strong></p>
 
 
 
@@ -1178,7 +1468,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.indexes", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.c21346df.min.js"></script>
