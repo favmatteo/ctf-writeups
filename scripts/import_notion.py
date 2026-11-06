@@ -289,11 +289,26 @@ def import_writeups(source_dir: Path, dest_dir: Path, assets_dir: Path, update_n
         })
 
     update_writeups_index(dest_dir, imported_records)
+    update_home_stats(imported_records)
     if update_nav:
         update_mkdocs_nav(imported_records)
 
     print(f"[✓] Importati {len(imported_records)} writeup con successo.")
     return imported_records
+
+def update_home_stats(records: list):
+    index_md = Path("docs/index.md")
+    if not index_md.exists():
+        return
+    total = len(records)
+    windows_count = sum(1 for r in records if "windows" in r["slug"].lower())
+    linux_count = total - windows_count
+
+    content = index_md.read_text(encoding="utf-8")
+    content = re.sub(r'id="stats-total">\d+<', f'id="stats-total">{total}<', content)
+    content = re.sub(r'id="stats-linux">\d+<', f'id="stats-linux">{linux_count}<', content)
+    content = re.sub(r'id="stats-windows">\d+<', f'id="stats-windows">{windows_count}<', content)
+    index_md.write_text(content, encoding="utf-8")
 
 def update_writeups_index(dest_dir: Path, records: list):
     index_path = dest_dir / "index.md"

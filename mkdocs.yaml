@@ -11,6 +11,7 @@ edit_uri: ""
 # Theme configuration
 theme:
   name: material
+  custom_dir: overrides
   language: it
   palette:
     # Rigorous dark terminal theme

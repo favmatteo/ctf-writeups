@@ -267,18 +267,61 @@
     });
   }
 
+  // Calcolo e iniezione della meta bar per ogni writeup (tempo di lettura, OS, piattaforma)
+  function renderWriteupMeta(article) {
+    const path = window.location.pathname;
+    if (!path.includes("/writeups/") || path.endsWith("/writeups/") || path.endsWith("/writeups/index.html")) {
+      return;
+    }
+
+    const h1 = article.querySelector("h1");
+    if (!h1 || article.querySelector(".writeup-meta-bar")) return;
+
+    let wordCount = 0;
+    const walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) {
+      const parent = walker.currentNode.parentElement;
+      if (parent && !parent.closest("pre") && !parent.closest("code") && !parent.closest("script") && !parent.closest(".terminal-spell-card")) {
+        const text = walker.currentNode.nodeValue.trim();
+        if (text) {
+          wordCount += text.split(/\s+/).length;
+        }
+      }
+    }
+
+    const minutes = Math.max(1, Math.ceil(wordCount / 180));
+    const titleText = (h1.innerText || "").toLowerCase();
+    const isWindows = titleText.includes("windows");
+    const osIcon = isWindows ? "🪟" : "🐧";
+    const osName = isWindows ? "Windows" : "Linux";
+
+    const metaBar = document.createElement("div");
+    metaBar.className = "writeup-meta-bar";
+    metaBar.innerHTML = `
+      <span class="meta-pill" title="Stima basata sulla lunghezza del report"><span class="meta-icon">⏱️</span> ~${minutes} min lettura</span>
+      <span class="meta-pill"><span class="meta-icon">${osIcon}</span> ${osName}</span>
+      <span class="meta-pill"><span class="meta-icon">🎯</span> TryHackMe</span>
+      <span class="meta-pill"><span class="meta-icon">📝</span> ${wordCount} parole</span>
+    `;
+
+    h1.insertAdjacentElement("afterend", metaBar);
+  }
+
   // Esecuzione principale
   function initPageCorrections() {
     const article = document.querySelector(".md-content article") || document.querySelector(".md-content");
     if (!article) return;
 
-    // 1. Censura automatica di sicurezza
+    // 1. Iniezione meta bar (read time, OS, piattaforma)
+    renderWriteupMeta(article);
+
+    // 2. Censura automatica di sicurezza
     autoCensorFlags(article);
 
-    // 2. Correzione ortografica
+    // 3. Correzione ortografica
     const count = autoSpellcheck(article);
 
-    // 3. Widget e pulsante di ripristino a fine pagina
+    // 4. Widget e pulsante di ripristino a fine pagina
     renderSpellWidget(article, count);
   }
 

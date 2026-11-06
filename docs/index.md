@@ -13,6 +13,29 @@ In ogni articolo vengono documentate le fasi della compromissione: ricognizione,
 
 ---
 
+## `favmatteo@kali:~$ ./ctf-stats.sh --summary`
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-number" id="stats-total">22</div>
+    <div class="stat-label">Box Risolte</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" id="stats-linux">21</div>
+    <div class="stat-label">Target Linux</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" id="stats-windows">1</div>
+    <div class="stat-label">Target Windows</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number">100%</div>
+    <div class="stat-label">TryHackMe</div>
+  </div>
+</div>
+
+---
+
 ## `favmatteo@kali:~$ ./latest-writeups.sh --limit 6`
 
 Le ultime macchine analizzate ordinate per data di scansione reale:
