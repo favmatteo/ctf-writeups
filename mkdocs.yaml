@@ -11,7 +11,7 @@ edit_uri: ""
 # Theme configuration
 theme:
   name: material
-  language: en
+  language: it
   palette:
     # Rigorous dark terminal theme
     scheme: slate
@@ -20,6 +20,9 @@ theme:
   font:
     text: JetBrains Mono
     code: JetBrains Mono
+  icon:
+    logo: fontawesome/solid/terminal
+    repo: fontawesome/brands/github
   features:
     - navigation.instant
     - navigation.tracking

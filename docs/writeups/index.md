@@ -11,6 +11,11 @@ Le flag all'interno dei testi sono oscurate per preservare la sfida delle challe
 
 ---
 
+<div class="table-search-bar">
+  <input type="text" id="machine-filter-input" class="table-search-input" placeholder="🔍 Cerca macchina per nome (es. '0day', 'robot', 'jump')..." oninput="filterMachines()">
+  <span id="machine-filter-count" class="table-search-count">22 macchine</span>
+</div>
+
 | Macchina / Stanza | Piattaforma | Link |
 | :--- | :--- | :--- |
 | **0day** | TryHackMe | [Leggi writeup →](0day.md) |

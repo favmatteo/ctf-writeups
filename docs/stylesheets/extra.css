@@ -395,5 +395,58 @@ a {
   color: var(--term-text-muted);
 }
 
+/* ==========================================================================
+   Real-Time Machine Filter Bar (Indice Writeup)
+   ========================================================================== */
+
+.table-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1.5rem 0 1.2rem 0;
+}
+
+.table-search-input {
+  flex: 1;
+  background: #0d1117 !important;
+  color: var(--term-green) !important;
+  border: 1px solid var(--term-border) !important;
+  border-left: 3px solid var(--term-green) !important;
+  padding: 0.55rem 0.85rem;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.table-search-input:focus {
+  outline: none;
+  border-color: var(--term-green) !important;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.15);
+}
+
+.table-search-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--term-green);
+  white-space: nowrap;
+  padding: 0.45rem 0.8rem;
+  background: var(--term-surface);
+  border: 1px solid var(--term-border);
+  border-radius: 4px;
+}
+
+/* Print Stylesheet */
+@media print {
+  body, .md-body, .md-content {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+  .md-header, .md-nav, .md-sidebar, .terminal-spell-card, .table-search-bar {
+    display: none !important;
+  }
+}
+
+
 
 
