@@ -526,6 +526,225 @@ a {
   font-size: 0.85rem;
 }
 
+/* ==========================================================================
+   Interactive Web Terminal (Shell Quake / Drawer)
+   ========================================================================== */
+
+/* Floating Action Button */
+.term-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #090c10;
+  color: var(--term-green);
+  border: 1px solid #00ff6680;
+  border-radius: 20px;
+  padding: 7px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.term-fab:hover {
+  background: #00ff6618;
+  border-color: #00ff66;
+  box-shadow: 0 4px 20px rgba(0, 255, 102, 0.25);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.term-fab-icon {
+  font-weight: bold;
+  color: #00ff66;
+}
+
+/* Finestra Terminale */
+.term-window {
+  position: fixed;
+  bottom: 74px;
+  right: 24px;
+  width: 640px;
+  max-width: calc(100vw - 32px);
+  height: 420px;
+  max-height: calc(100vh - 120px);
+  z-index: 1000;
+  background: #080a0e;
+  border: 1px solid #1e2430;
+  border-top: 3px solid var(--term-green);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 1px rgba(0, 255, 102, 0.3);
+  animation: termSlideIn 0.22s ease-out;
+}
+
+.term-window--maximized {
+  width: calc(100vw - 36px) !important;
+  height: calc(100vh - 90px) !important;
+  max-height: calc(100vh - 90px) !important;
+  right: 18px !important;
+  bottom: 30px !important;
+}
+
+@keyframes termSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Barra del titolo */
+.term-win-bar {
+  background: #11151c;
+  padding: 0.45rem 0.8rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #1e2430;
+  user-select: none;
+}
+
+.term-win-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.term-win-dots .term-dot {
+  cursor: pointer;
+}
+
+.term-win-title {
+  margin-left: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  color: #8b949e;
+  flex: 1;
+}
+
+.term-win-close-x {
+  background: transparent;
+  border: none;
+  color: #8b949e;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 3px;
+  transition: color 0.15s;
+}
+
+.term-win-close-x:hover {
+  color: #ff5f56;
+}
+
+/* Schermata interna */
+.term-win-body {
+  flex: 1;
+  background: #080a0e;
+  padding: 0.9rem 1rem;
+  overflow-y: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.83rem;
+  line-height: 1.55;
+  color: #e6edf3;
+}
+
+.term-banner {
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+.term-history-entry {
+  margin: 0.5rem 0;
+}
+
+.term-line-input {
+  color: #e6edf3;
+  margin-bottom: 0.25rem;
+}
+
+.term-line-output {
+  color: #c9d1d9;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.term-prompt-line {
+  display: flex;
+  align-items: center;
+  margin-top: 0.6rem;
+}
+
+.term-prompt-label, .term-prompt-prefix {
+  color: var(--term-green);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.term-prompt-cwd {
+  color: #38bdf8;
+}
+
+.term-cmd-input {
+  flex: 1;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: #ffffff !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.85rem !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  caret-color: #00ff66;
+  box-shadow: none !important;
+}
+
+/* Griglia dei writeup stampata con 'ls' */
+.term-ls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.4rem 0.8rem;
+  margin: 0.6rem 0;
+}
+
+.term-ls-link {
+  text-decoration: underline;
+  font-size: 0.8rem;
+  transition: color 0.15s;
+}
+
+.term-ls-link:hover {
+  color: #55ff99 !important;
+  text-shadow: 0 0 6px rgba(0, 255, 102, 0.4);
+}
+
+@media (max-width: 600px) {
+  .term-window {
+    width: calc(100vw - 20px);
+    right: 10px;
+    bottom: 65px;
+    height: 380px;
+  }
+  .term-fab {
+    bottom: 16px;
+    right: 16px;
+    padding: 6px 12px;
+  }
+}
+
+
 
 
 
