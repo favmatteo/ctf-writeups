@@ -288,4 +288,30 @@
   } else {
     document.addEventListener("DOMContentLoaded", initPageCorrections);
   }
+
+  // Funzione globale per filtrare in tempo reale la tabella dell'indice
+  window.filterMachines = function () {
+    const input = document.getElementById("machine-filter-input");
+    if (!input) return;
+    const query = input.value.toLowerCase().trim();
+    const table = document.querySelector(".md-typeset table");
+    if (!table) return;
+    const rows = table.querySelectorAll("tbody tr");
+    let matchCount = 0;
+
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      if (!query || text.includes(query)) {
+        row.style.display = "";
+        matchCount++;
+      } else {
+        row.style.display = "none";
+      }
+    });
+
+    const countEl = document.getElementById("machine-filter-count");
+    if (countEl) {
+      countEl.innerText = query ? `${matchCount} di ${rows.length} trovate` : `${rows.length} macchine`;
+    }
+  };
 })();
