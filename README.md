@@ -52,9 +52,7 @@ PersonalBlog/
 │   └── writeups/
 │       ├── index.md              # Indice/catalogo completo dei writeup
 │       ├── assets/               # Immagini dei writeup organizzate per macchina
-│       ├── web-linux-infiltrate.md        # Esempio realistico Linux / Web
-│       ├── linux-privesc-kernel-suid.md   # Esempio realistico Linux PrivEsc
-│       └── <writeup-importati>.md         # Writeup generati dal parser Notion
+│       └── <writeup-importati>.md         # Writeup generati dal parser Notion (es. 0day.md, dogcat.md)
 ├── notion_export/                # Cartella per estrarre o salvare gli Zip di Notion
 ├── scripts/
 │   └── import_notion.py          # Script Python per il parsing e importazione
