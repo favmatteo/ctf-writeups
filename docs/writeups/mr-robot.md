@@ -161,7 +161,7 @@ Si capisce subito che è un applicazione wordpress
 
 Guardando la sorgente della pagina principale `/` si trova questo `script javascript` 
 
-```jsx
+```html
 <script>var USER_IP='208.185.115.6';var BASE_URL='index.html';var RETURN_URL='index.html';var REDIRECT=false;window.log=function(){log.history=log.history||[];log.history.push(arguments);if(this.console){console.log(Array.prototype.slice.call(arguments));}};</script>
 ```
 
@@ -185,7 +185,7 @@ Per completezza:
 
 Partendo dalla wordlist di tutte le password trovate prima, eliminiamo i duplicati con `sort -u` 
 
-```jsx
+```bash
 sort -u fsocity.dic > fsocity_uniq.dic
 ```
 

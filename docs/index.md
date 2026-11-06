@@ -147,8 +147,13 @@ Le ultime macchine analizzate ordinate per data di scansione reale:
     pickNextTarget();
   };
 
-  // Avvio al caricamento della pagina
-  setTimeout(startCountdown, 500);
+  // Avvio al caricamento della pagina: sincronizza indice iniziale e avvia timer
+  const initialLink = document.getElementById("random-box-link");
+  if (initialLink) {
+    const found = writeups.findIndex(w => w.title === initialLink.innerText.trim());
+    if (found !== -1) currentIndex = found;
+  }
+  setTimeout(startCountdown, 300);
 })();
 </script>
 
@@ -156,6 +161,6 @@ Le ultime macchine analizzate ordinate per data di scansione reale:
 
 ## Archivio Completo
 
-Per visualizzare e filtrare tutte le 22 macchine disponibili:
+Per visualizzare la lista completa e accedere a tutti i report disponibili:
 
 👉 **[Apri l'Indice Generale dei Writeup](writeups/index.md)**

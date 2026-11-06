@@ -2,8 +2,6 @@
    Clean Terminal & Dark Cybersecurity Style
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
-
 :root {
   --term-bg: #0a0c10;
   --term-surface: #111419;
@@ -222,4 +220,57 @@ a {
   color: #6e7681;
   margin-left: 0.6rem;
 }
+
+/* Monospace Badges */
+.terminal-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  border-radius: 3px;
+  background: #161b22;
+  color: var(--term-text-muted);
+  border: 1px solid var(--term-border);
+  margin-right: 0.35rem;
+  margin-bottom: 0.35rem;
+}
+
+.terminal-badge.green {
+  border-color: #00ff6640;
+  color: #00ff66;
+  background: #00ff6610;
+}
+
+.terminal-badge.yellow {
+  border-color: #ffbd2e40;
+  color: #ffbd2e;
+  background: #ffbd2e10;
+}
+
+.terminal-badge.blue {
+  border-color: #38bdf840;
+  color: #38bdf8;
+  background: #38bdf810;
+}
+
+.terminal-badge.red {
+  border-color: #ff5f5640;
+  color: #ff5f56;
+  background: #ff5f5610;
+}
+
+/* Mobile & Responsive Adjustments */
+@media (max-width: 600px) {
+  .terminal-output {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  .random-btn, .random-timer {
+    margin-left: 0;
+  }
+}
+
 

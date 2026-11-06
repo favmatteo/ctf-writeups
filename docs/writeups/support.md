@@ -166,7 +166,7 @@ $SITE_NAME = 'support_portal';
 
 Loggandoci per qualche oscuro motivo dovevi arrivarci a caso che per loggarti dovevi togliere la @ otteniamo la flag
 
-`THM{I_AM_ADMIN999}`
+`THM{****************}`
 
 Ora che siamo dentro in basso a destra c’è un pulsante che se cliccato mostra la data o l’orario. guardando è tutto gestito dal frontend e il BE legge i comandi direttamente dal FE (MALE! si fida troppo del FRONTEND!)
 
@@ -211,4 +211,4 @@ Date
 </option>
 ```
 
-E otteniamo la flag `THM{I_AM_ADMIN001}`
+E otteniamo la flag `THM{****************}`

@@ -13,27 +13,27 @@
 [![MkDocs](https://img.shields.io/badge/MkDocs-1.6.1-green.svg?style=flat-square&logo=markdown)](https://www.mkdocs.org/)
 [![Material for MkDocs](https://img.shields.io/badge/Material%20for%20MkDocs-9.8.0-00ff66.svg?style=flat-square&logo=materialformkdocs)](https://squidfunk.github.io/mkdocs-material/)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg?style=flat-square&logo=python)](https://www.python.org/)
-[![GitHub Actions](https://img.shields.io/badge/GitHub%20Pages-Automated%20CI%2FCD-2ea44f.svg?style=flat-square&logo=githubactions)](https://github.com/features/actions)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-2ea44f.svg?style=flat-square&logo=github)](https://favmatteo.github.io/ctf-writeups/)
 
-Un blog statico completo e minimale in stile **hacker / terminale** per raccogliere, organizzare e pubblicare i propri writeup di CTF (TryHackMe, HackTheBox, VulnHub) esportati direttamente da **Notion**.
+Un blog statico completo e minimale in stile **hacker / terminale** per raccogliere, organizzare e pubblicare i propri writeup di CTF esportati direttamente da **Notion**.
 
-Basato su **Python**, **MkDocs** e il tema **mkdocs-material**, include uno script intelligente di parsing e automazione, stili CSS personalizzati (CRT scanlines, neon glow, cursore lampeggiante) e una pipeline GitHub Actions già pronta per il deploy automatico su GitHub Pages.
+Basato su **Python**, **MkDocs** e il tema **mkdocs-material**, include uno script intelligente di parsing e automazione, stili CSS personalizzati in tema dark terminal e deploy diretto su GitHub Pages con `mkdocs gh-deploy`.
 
 ---
 
 ## ⚡ Caratteristiche Principali
 
-- 💻 **Stile Terminale Scuro:** Palette `slate` con sfondo rigorosamente scuro (`#0a0a0a`), font monospace (`JetBrains Mono` / `Fira Code`), accenti verde neon (`#00ff66`), cursore lampeggiante ed effetti scanline CRT leggeri.
+- 💻 **Stile Terminale Scuro:** Palette `slate` con sfondo scuro (`#0a0c10`), font monospace (`JetBrains Mono`), accenti verde terminale (`#00ff66`), badge dedicati e widget interattivo con ciclo casuale delle macchine.
 - 🔄 **Parser Automatico da Notion (`scripts/import_notion.py`):**
   - Rimuove automaticamente i lunghi identificatori esadecimali (UUID a 32 caratteri) generati da Notion nei nomi di file e cartelle.
   - Estrae automaticamente gli archivi `.zip` posti in `notion_export/`.
+  - Esclude automaticamente bozze o note incomplete (es. file con tag `[INCOMPLETO]`).
   - Copia e organizza tutte le immagini collegate in `docs/writeups/assets/<slug>/`, sistemando i link relativi e risolvendo i caratteri URL-encoded (`%20`).
-  - Normalizza i linguaggi dei blocchi di codice (converte i tag errati di Notion come `basic` o blocchi vuoti in `bash` quando rileva prompt o tool di pentesting).
-  - Converte i callout e le emoji di Notion in blocchi di admonition nativi di MkDocs Material.
-  - Rigenera in automatico la tabella dell'archivio in `docs/writeups/index.md` e aggiorna il menu di navigazione in `mkdocs.yaml`.
-- 🚩 **Spoiler Box per Flag:** Supporto integrato ai blocchi collassabili `pymdownx.details` (`???+ success "Flag"`) per non spoilerare le flag durante la lettura.
+  - Normalizza i linguaggi dei blocchi di codice (converte i tag errati di Notion come `basic` o blocchi non tipizzati in `bash` quando rileva prompt o tool di pentesting).
+  - Rigenera in automatico la tabella dell'archivio in `docs/writeups/index.md` e sincronizza il menu di navigazione in `mkdocs.yaml`.
+- 🛡️ **Preservazione delle Sfide:** Le flag delle macchine all'interno dei testi sono oscurate (`THM{********}`) per rispetto delle challenge e delle policy delle piattaforme.
 - 🔍 **Ricerca Full-Text Istantanea:** Plugin di ricerca integrato con autocompletamento e suggerimenti in tempo reale.
-- 🚀 **Deploy Automatico su GitHub Pages:** Pipeline GitHub Actions configurata su `.github/workflows/deploy.yml` che compila il sito e lo pubblica automaticamente ad ogni push sul branch `main`.
+- 🚀 **Deploy Rapido con `mkdocs gh-deploy`:** Compilazione e pubblicazione sul branch `gh-pages` con un singolo comando locale.
 
 ---
 
@@ -41,23 +41,22 @@ Basato su **Python**, **MkDocs** e il tema **mkdocs-material**, include uno scri
 
 ```text
 PersonalBlog/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml            # CI/CD: build e deploy automatico su GitHub Pages
 ├── docs/
-│   ├── about.md                  # Pagina About: bio, certificazioni e toolkit
-│   ├── index.md                  # Home Page con banner ASCII art e ultimi articoli
+│   ├── about.md                  # Pagina About: bio e profili ufficiali
+│   ├── index.md                  # Home Page: ultimi writeup per data e widget target
 │   ├── stylesheets/
-│   │   └── extra.css             # CSS custom (tema terminale, glow, animazioni)
+│   │   └── extra.css             # CSS custom (tema terminale dark, tabelle, badge)
 │   └── writeups/
-│       ├── index.md              # Indice/catalogo completo dei writeup
-│       ├── assets/               # Immagini dei writeup organizzate per macchina
-│       └── <writeup-importati>.md         # Writeup generati dal parser Notion (es. 0day.md, dogcat.md)
-├── notion_export/                # Cartella per estrarre o salvare gli Zip di Notion
+│       ├── index.md              # Indice completo dei writeup
+│       ├── assets/               # Immagini dei writeup organizzate per cartella macchina
+│       └── <writeup-importati>.md# Writeup generati dal parser Notion
+├── notion_export/                # Cartella per estrarre o salvare gli export di Notion
 ├── scripts/
 │   └── import_notion.py          # Script Python per il parsing e importazione
 ├── mkdocs.yaml                   # Configurazione principale MkDocs
 ├── requirements.txt              # Dipendenze Python
+└── README.md                     # Documentazione del progetto
+```
 └── README.md                     # Documentazione del progetto
 ```
 
@@ -201,15 +200,14 @@ Sfruttamento vulnerabilità per ottenere la reverse shell iniziale.
 Analisi permessi SUID, cronjob, capabilities o vulnerabilità kernel per diventare root.
 
 ## [+] Flag
-???+ success "User & Root Flag"
-    ```text
-    [+] User Flag: THM{user_flag_here}
-    [+] Root Flag: THM{root_flag_here}
-    ```
+```text
+[+] User Flag: THM{****************}
+[+] Root Flag: THM{****************}
+```
 ````
 
 ---
 
 ## 📜 Licenza & Disclaimer
 
-Questo archivio è rilasciato per scopi puramente educativi e di security research. Tutte le tecniche descritte sono applicate su challenge CTF autorizzate e macchine vulnerabili in laboratorio (HackTheBox, TryHackMe, VulnHub).
+Questo archivio è rilasciato per scopi puramente educativi e di security research. Tutte le tecniche descritte sono applicate su challenge CTF autorizzate e macchine vulnerabili in laboratorio (TryHackMe).

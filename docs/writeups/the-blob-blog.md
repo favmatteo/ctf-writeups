@@ -180,7 +180,7 @@ $ whoami
 bobloblaw
 ```
 
-E prendiamo la flag `THM{C0NGR4t$_g3++ing_this_fur}`
+E prendiamo la flag `THM{****************************}`
 
 Ora dobbiamo fare privileage escalation verso root.
 

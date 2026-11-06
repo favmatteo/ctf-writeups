@@ -251,7 +251,7 @@ passwordMysql.log
 root.txt
 root@ip-10-128-186-68:~# cat root.txt
 cat root.txt
-THM{33ad5b530e71a172648f424ec23fae60}
+THM{********************************}
 root@ip-10-128-186-68:~# 
 
 ```

@@ -36,8 +36,11 @@ def extract_zips_if_any(source_dir: Path):
     zip_files = list(source_dir.glob("*.zip"))
     for zf in zip_files:
         print(f"[+] Estrazione archivio zip: {zf.name}...")
-        with zipfile.ZipFile(zf, 'r') as zip_ref:
-            zip_ref.extractall(source_dir)
+        try:
+            with zipfile.ZipFile(zf, 'r') as zip_ref:
+                zip_ref.extractall(source_dir)
+        except Exception as e:
+            print(f"[-] Errore estrazione {zf.name}: {e}")
 
 def normalize_code_blocks(content: str) -> str:
     lines = content.split('\n')
@@ -54,15 +57,22 @@ def normalize_code_blocks(content: str) -> str:
                 block_lines = []
             else:
                 in_block = False
-                first_few_lines = "\n".join(block_lines[:5]).lower()
-                has_bash_indicators = any(x in first_few_lines for x in [
+                block_text = "\n".join(block_lines[:6]).lower()
+                has_bash_indicators = any(x in block_text for x in [
                     "kali@", "root@", "$ sudo", "$ nmap", "$ cat", "$ ffuf", "$ curl",
-                    "# whoami", "starting nmap", "uid=", "gid=", "msf exploit("
+                    "# whoami", "starting nmap", "uid=", "gid=", "msf exploit(", "gobuster"
                 ])
                 if current_lang in ["basic", "jsx", "", "plain text", "txt"]:
                     if has_bash_indicators:
                         current_lang = "bash"
-                    elif current_lang == "plain text":
+                    elif current_lang == "jsx":
+                        if "<script" in block_text or "<html" in block_text:
+                            current_lang = "html"
+                        elif "function" in block_text or "var " in block_text or "const " in block_text:
+                            current_lang = "javascript"
+                        else:
+                            current_lang = "text"
+                    elif current_lang in ["plain text", "txt"]:
                         current_lang = "text"
                     elif current_lang == "basic":
                         current_lang = "bash"
@@ -132,6 +142,42 @@ def process_images_and_links(
 
     content = md_img_pat.sub(replace_image, content)
 
+    # Gestione embed stile Obsidian ![[immagine.png]]
+    obsidian_img_pat = re.compile(r'!\[\[(.*?)\]\]')
+    def replace_obsidian_img(match):
+        nonlocal image_count
+        raw_name = match.group(1).strip()
+        decoded_name = urllib.parse.unquote(raw_name)
+        candidates = [
+            source_file_dir / decoded_name,
+            source_file_dir.parent / decoded_name,
+            source_file_dir / Path(decoded_name).name,
+        ]
+        found_src = None
+        for cand in candidates:
+            if cand.is_file():
+                found_src = cand
+                break
+        if not found_src:
+            matches = list(source_file_dir.glob(f"**/{Path(decoded_name).name}"))
+            if matches:
+                found_src = matches[0]
+
+        if found_src and found_src.is_file():
+            target_asset_dir.mkdir(parents=True, exist_ok=True)
+            safe_name = re.sub(r'\s+', '-', found_src.name)
+            dest_file = target_asset_dir / safe_name
+            shutil.copy2(found_src, dest_file)
+            image_count += 1
+            return f'![{Path(decoded_name).name}](assets/{slug}/{safe_name})'
+        return ''
+
+    content = obsidian_img_pat.sub(replace_obsidian_img, content)
+
+    # Rimuove link privati a Notion convertendoli in testo evidenziato
+    notion_link_pat = re.compile(r'\[(.*?)\]\(https?://(?:www\.)?(?:app\.)?notion\.(?:com|so)/[^\)]+\)')
+    content = notion_link_pat.sub(r'**\1**', content)
+
     md_link_pat = re.compile(r'\[(.*?)\]\((.*?)\)')
     def replace_link(match):
         text = match.group(1)
@@ -145,6 +191,10 @@ def process_images_and_links(
         return match.group(0)
 
     content = md_link_pat.sub(replace_link, content)
+
+    # Oscuramento automatico delle flag THM raw
+    content = re.sub(r'\b(THM|thm)\{([^*\s}]+)\}', lambda m: f"{m.group(1)}{{********************************}}", content)
+
     return content, image_count
 
 def import_writeups(source_dir: Path, dest_dir: Path, assets_dir: Path, update_nav: bool = True):
@@ -279,8 +329,9 @@ def update_mkdocs_nav(records: list):
         lines.append("  - About: about.md")
         nav_block = "\n".join(lines) + "\n"
 
-        if "nav:" in content:
-            new_content = re.sub(r'nav:\s*\n.*', nav_block, content, flags=re.DOTALL)
+        nav_pattern = re.compile(r'^nav:\s*\n(?:[ \t].*\n|\s*\n)*', flags=re.MULTILINE)
+        if nav_pattern.search(content):
+            new_content = nav_pattern.sub(nav_block, content)
         else:
             new_content = content.rstrip() + "\n\n" + nav_block
 

@@ -42,7 +42,7 @@ Analizziamo quindi la pagina web
 
 Analizzando il codice sorgente, vediamo un username tra i commenti.
 
-```jsx
+```text
 view-source:http://10.128.140.205/
 ```
 

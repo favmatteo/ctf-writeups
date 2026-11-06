@@ -9,7 +9,7 @@ description: "CTF Writeup - TryHeartMe (TryHackMe)"
 
 **IP: 10.129.132.143**
 
-Iniziamo con la nostra classica [**enumerazione**](https://app.notion.com/p/Active-Recon-3d0ee36546c28137b0b9cd3fe0db9795?pvs=21) per vedere i servizi attivi nella macchina:
+Iniziamo con la nostra classica **enumerazione** per vedere i servizi attivi nella macchina:
 
 ```bash
                                                                                                                     
@@ -39,9 +39,9 @@ sono presenti due servizi
 | Servizio | Porta | Versione |
 | --- | --- | --- |
 | ssh | 22 | OpenSSH 9.6p1 |
-| [http](https://app.notion.com/p/HTTP-3d0ee36546c2818eb13ed762a1e982fa?pvs=21) | 5000 | Werkzeug httpd 3.0.1 (python) |
+| http | 5000 | Werkzeug httpd 3.0.1 (python) |
 
-Facciamo path discovery nel servizio web per trovare qualche servizio interessante, usando [GoBuster](https://app.notion.com/p/Gobuster-3d0ee36546c2813bbf37ce75372f9f54?pvs=21). Trattandosi di un server python cerchiamo anche per estensione .py
+Facciamo path discovery nel servizio web per trovare qualche servizio interessante, usando **GoBuster**. Trattandosi di un server python cerchiamo anche per estensione .py
 
 ```bash
 kali@kali:~$ gobuster dir -u http://10.129.132.143:5000/ -w /usr/share/seclists/Discovery/Web-Content/common.txt -x ".py,.txt,.bak"
@@ -120,7 +120,7 @@ E’ andato siamo admin!
 
 ![image.png](assets/tryheartme/image-2.png)
 
-Navigando nella pagina di admin troviamo la flag **`THM{v4l3nt1n3_jwt_c00k13_t4mp3r_4dm1n_sh0p}`** 
+Navigando nella pagina di admin troviamo la flag **`THM{********************************}`** 
 
 ![image.png](assets/tryheartme/image-3.png)
 

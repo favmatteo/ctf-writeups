@@ -24,7 +24,6 @@ theme:
     - navigation.instant
     - navigation.tracking
     - navigation.sections
-    - navigation.indexes
     - navigation.expand
     - navigation.top
     - search.suggest
@@ -36,6 +35,16 @@ theme:
 # Custom styling for hacker terminal aesthetic
 extra_css:
   - stylesheets/extra.css
+
+# Social & Footer
+copyright: "Copyright &copy; Matteo Favaro"
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/favmatteo
+    - icon: fontawesome/solid/cube
+      link: https://tryhackme.com/p/matteo.favaro460
+      name: TryHackMe Profile
 
 # Plugins
 plugins:

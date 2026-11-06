@@ -13,5 +13,5 @@ L'obiettivo è documentare il percorso di analisi e tenere traccia delle tecnich
 
 ## Profili Ufficiali
 
-- **TryHackMe:** [`matteo.favaro460`](https://tryhackme.com/p/matteo.favaro460) &rarr; [tryhackme.com/p/matteo.favaro460](https://tryhackme.com/p/matteo.favaro460)
-- **GitHub:** [`favmatteo`](https://github.com/favmatteo) &rarr; [github.com/favmatteo](https://github.com/favmatteo)
+- **TryHackMe:** [`matteo.favaro460`](https://tryhackme.com/p/matteo.favaro460) → [tryhackme.com/p/matteo.favaro460](https://tryhackme.com/p/matteo.favaro460)
+- **GitHub:** [`favmatteo`](https://github.com/favmatteo) → [github.com/favmatteo](https://github.com/favmatteo)

@@ -284,7 +284,7 @@ Session completed.
 
 Trovata la passphrase, possiamo loggarci e prendere la prima flag
 
-![paint_blurred_pixel(3).png](mustacchio.md).png)
+![paint_blurred_pixel(3).png](assets/mustacchio/paint_blurred_pixel-3.png)
 
 Ora è arrivato il momento del privelage escalation. 
 
