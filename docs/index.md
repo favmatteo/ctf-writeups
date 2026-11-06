@@ -5,22 +5,139 @@ description: "Archivio di writeup e note di sicurezza per macchine TryHackMe ris
 
 # CTF Writeups // favmatteo
 
-Benvenuto nel mio archivio personale di writeup per le macchine CTF risolte principalmente sulla piattaforma **TryHackMe**.
+Benvenuto nel mio archivio personale di writeup per le macchine CTF risolte sulla piattaforma **TryHackMe**.
 
-In ogni articolo vengono documentate le fasi della compromissione:
-- **Ricognizione & Scansione:** identificazione delle porte e delle versioni dei servizi esposti.
-- **Enumerazione:** directory busting, analisi delle risposte HTTP, ispezione dei parametri e ricerca di vulnerabilità.
-- **Initial Foothold (Exploit):** sfruttamento del vettore d'attacco per ottenere la prima shell utente.
-- **Privilege Escalation:** enumerazione interna di permessi SUID, cronjob, capabilities o misconfiguration per ottenere l'accesso come `root`.
+In ogni articolo vengono documentate le fasi della compromissione: ricognizione, scansione delle porte, enumerazione, exploit per l'initial foothold e privilege escalation per ottenere l'accesso root.
 
-> Le flag all'interno dei writeup sono intenzionalmente oscurate (`THM{********}`) per rispettare le regole delle challenge e non spoilerare le soluzioni.
+> Le flag all'interno dei testi sono oscurate (`THM{********}`) per preservare le challenge.
 
 ---
 
-## Indice Rapido delle Macchine
+## `favmatteo@kali:~$ ./latest-writeups.sh --limit 6`
 
-Puoi utilizzare la barra di ricerca in alto (o la scorciatoia ++ctrl+k++) per cercare rapidamente qualsiasi comando, porta, CVE o nome di macchina.
+Le ultime macchine analizzate ordinate per data di scansione reale:
 
-Per consultare l'elenco completo con tutti i report:
+| Data Scansione | Macchina / Box | Piattaforma | Link Report |
+| :--- | :--- | :--- | :--- |
+| `2026-11-06` | **Silver Platter** | TryHackMe | [Leggi writeup →](writeups/silver-platter.md) |
+| `2026-11-04` | **Billing** | TryHackMe | [Leggi writeup →](writeups/billing.md) |
+| `2026-10-31` | **Windows Jump** | TryHackMe | [Leggi writeup →](writeups/windows-jump.md) |
+| `2026-10-31` | **GamingServer** | TryHackMe | [Leggi writeup →](writeups/gamingserver.md) |
+| `2026-10-30` | **0day** | TryHackMe | [Leggi writeup →](writeups/0day.md) |
+| `2026-10-27` | **Watcher** | TryHackMe | [Leggi writeup →](writeups/watcher.md) |
 
-👉 **[Vai all'Archivio Completo dei Writeup](writeups/index.md)**
+---
+
+## `favmatteo@kali:~$ shuf -n 1 targets.txt --auto-cycle`
+
+<div class="terminal-card">
+  <div class="terminal-bar">
+    <span class="term-dot red"></span>
+    <span class="term-dot yellow"></span>
+    <span class="term-dot green"></span>
+    <span class="term-title">bash - favmatteo@kali: ~</span>
+  </div>
+  <div class="terminal-body">
+    <div class="terminal-cmd">favmatteo@kali:~$ ./random-target.sh</div>
+    <div class="terminal-output">
+      [+] Target estratto: <a id="random-box-link" href="writeups/silver-platter.md" class="random-box-title">Silver Platter</a>
+      <button class="random-btn" id="reroll-btn" onclick="rerollTarget()">🎲 Reroll</button>
+      <span class="random-timer" id="random-timer">prossimo tra 5s...</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const writeups = [
+    { title: "0day", url: "writeups/0day.md" },
+    { title: "Agent Sudo", url: "writeups/agent-sudo.md" },
+    { title: "Billing", url: "writeups/billing.md" },
+    { title: "ConvertMyVideo", url: "writeups/convertmyvideo.md" },
+    { title: "dogcat", url: "writeups/dogcat.md" },
+    { title: "GamingServer", url: "writeups/gamingserver.md" },
+    { title: "Jump", url: "writeups/jump.md" },
+    { title: "Mr Robot", url: "writeups/mr-robot.md" },
+    { title: "Mustacchio", url: "writeups/mustacchio.md" },
+    { title: "Operation Promotion", url: "writeups/operation-promotion.md" },
+    { title: "Overpass", url: "writeups/overpass.md" },
+    { title: "Overpass 3 - Hosting", url: "writeups/overpass-3-hosting.md" },
+    { title: "Pickle Rick", url: "writeups/pickle-rick.md" },
+    { title: "Road", url: "writeups/road.md" },
+    { title: "Silver Platter", url: "writeups/silver-platter.md" },
+    { title: "Support", url: "writeups/support.md" },
+    { title: "The Blob Blog", url: "writeups/the-blob-blog.md" },
+    { title: "The Marketplace", url: "writeups/the-marketplace.md" },
+    { title: "Tomghost", url: "writeups/tomghost.md" },
+    { title: "TryHeartMe", url: "writeups/tryheartme.md" },
+    { title: "Watcher", url: "writeups/watcher.md" },
+    { title: "Windows Jump", url: "writeups/windows-jump.md" }
+  ];
+
+  let currentIndex = -1;
+  let countdown = 5;
+  const chars = "!<>-_\\/[]{}—=+*^?#________";
+
+  function scrambleText(element, finalText, callback) {
+    let iteration = 0;
+    const interval = setInterval(() => {
+      element.innerText = finalText
+        .split("")
+        .map((char, index) => {
+          if (index < iteration) {
+            return finalText[index];
+          }
+          return chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join("");
+
+      if (iteration >= finalText.length) {
+        clearInterval(interval);
+        if (callback) callback();
+      }
+      iteration += 1 / 2;
+    }, 25);
+  }
+
+  window.rerollTarget = function() {
+    const linkEl = document.getElementById("random-box-link");
+    if (!linkEl) return;
+    
+    let nextIndex;
+    do {
+      nextIndex = Math.floor(Math.random() * writeups.length);
+    } while (nextIndex === currentIndex && writeups.length > 1);
+    
+    currentIndex = nextIndex;
+    const item = writeups[currentIndex];
+    countdown = 5;
+    
+    scrambleText(linkEl, item.title, () => {
+      linkEl.href = item.url;
+    });
+  };
+
+  // Timer interval for countdown
+  setInterval(() => {
+    const timerEl = document.getElementById("random-timer");
+    if (!timerEl) return;
+    countdown--;
+    if (countdown <= 0) {
+      window.rerollTarget();
+    } else {
+      timerEl.innerText = `prossimo tra ${countdown}s...`;
+    }
+  }, 1000);
+
+  // Initial pick
+  setTimeout(window.rerollTarget, 300);
+})();
+</script>
+
+---
+
+## Archivio Completo
+
+Per visualizzare e filtrare tutte le 22 macchine disponibili:
+
+👉 **[Apri l'Indice Generale dei Writeup](writeups/index.md)**
